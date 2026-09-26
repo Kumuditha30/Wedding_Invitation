@@ -13,39 +13,7 @@ type Guest = {
   message: string | null;
 };
 
-function CoupleAnimation() {
-  return (
-    <div className="couple-art" aria-hidden="true">
-      <svg viewBox="0 0 420 330" role="img">
-        <defs>
-          <linearGradient id="dress" x1="0" x2="1">
-            <stop offset="0" stopColor="#f4eee9" />
-            <stop offset="1" stopColor="#c9c0bb" />
-          </linearGradient>
-          <linearGradient id="suit" x1="0" x2="1">
-            <stop offset="0" stopColor="#161619" />
-            <stop offset="1" stopColor="#34343a" />
-          </linearGradient>
-        </defs>
-        <g className="heart-float"><path d="M210 62 C196 47 171 68 210 96 C249 68 224 47 210 62Z" fill="#ef234c" /></g>
-        <g className="couple-float">
-          <circle cx="160" cy="103" r="32" fill="#c48c70" />
-          <path d="M126 102 C127 67 185 61 193 101 C174 82 146 82 126 102Z" fill="#161619" />
-          <path d="M117 302 C121 236 127 176 160 169 C193 176 199 236 203 302Z" fill="url(#dress)" />
-          <path d="M144 174 L160 215 L176 174" fill="#b3132b" opacity=".75" />
-          <circle cx="260" cy="108" r="31" fill="#a96f58" />
-          <path d="M228 106 C228 70 286 69 291 105 C273 87 246 86 228 106Z" fill="#252126" />
-          <path d="M219 302 C223 233 230 181 260 174 C290 181 297 233 301 302Z" fill="url(#suit)" />
-          <path d="M260 178 L248 214 L260 236 L272 214Z" fill="#ef234c" />
-          <path d="M195 218 C220 226 225 240 234 252" stroke="#c48c70" strokeWidth="9" fill="none" strokeLinecap="round" />
-          <path d="M225 245 C203 232 193 227 180 218" stroke="#a96f58" strokeWidth="9" fill="none" strokeLinecap="round" />
-          <circle cx="204" cy="229" r="7" fill="#ef234c" />
-        </g>
-        <path d="M55 296 C105 270 145 316 190 290 C235 264 275 314 365 284" fill="none" stroke="#b3132b" strokeOpacity=".45" strokeWidth="2" />
-      </svg>
-    </div>
-  );
-}
+
 
 function Countdown() {
   const [remaining, setRemaining] = useState({
@@ -162,7 +130,7 @@ export default function InvitationClient({ guest }: { guest: Guest }) {
         <div className="opening-screen">
           <div className="opening-card">
             <div className="opening-kicker">You are invited</div>
-            <CoupleAnimation />
+            
             <div className="opening-title">Sachintha <span>&amp;</span> Ranumi</div>
             <div className="opening-subtitle">The Homecoming • December 5th, 2026</div>
             <button className="open-invitation" type="button" onClick={openInvitation}>
