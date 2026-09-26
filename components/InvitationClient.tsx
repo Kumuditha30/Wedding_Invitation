@@ -272,40 +272,7 @@ export default function InvitationClient({ guest }: { guest: Guest }) {
               </button>
             </div>
 
-            {status === "attending" && (
-              <>
-                <label
-                  htmlFor="attendeeCount"
-                  style={{
-                    display: "block",
-                    textAlign: "left",
-                    marginTop: 18,
-                    color: "#aaa"
-                  }}
-                >
-                  How many will attend? (max {guest.seats})
-                </label>
-                <select
-                  id="attendeeCount"
-                  className="input"
-                  value={attendeeCount}
-                  onChange={(e) =>
-                    setAttendeeCount(
-                      Math.min(guest.seats, Math.max(1, Number(e.target.value)))
-                    )
-                  }
-                  style={{ marginTop: 8 }}
-                >
-                  {Array.from({ length: guest.seats }, (_, i) => i + 1).map(
-                    (n) => (
-                      <option key={n} value={n}>
-                        {n}
-                      </option>
-                    )
-                  )}
-                </select>
-              </>
-            )}
+
 
             <textarea
               className="message-box"
