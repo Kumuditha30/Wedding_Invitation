@@ -287,6 +287,7 @@ export default function InvitationClient({ guest }: { guest: Guest }) {
               >
                 <span className="big">♥</span>
                 <strong>Yes, I&apos;m coming</strong>
+                <br></br>
                 <small>We&apos;ll see you there.</small>
               </button>
 
@@ -297,6 +298,7 @@ export default function InvitationClient({ guest }: { guest: Guest }) {
               >
                 <span className="big">×</span>
                 <strong>Sorry, I can&apos;t come</strong>
+                <br></br>
                 <small>Thank you for letting us know.</small>
               </button>
             </div>
@@ -350,7 +352,7 @@ export default function InvitationClient({ guest }: { guest: Guest }) {
               onClick={submitRsvp}
               disabled={saving || status === "pending"}
             >
-              {saving ? "Saving..." : "Confirm RSVP"}
+              {saving ? "Saving..." : "Confirm"}
             </button>
 
             {status === "pending" && (
