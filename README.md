@@ -138,3 +138,6 @@ The main wedding content is in:
 
 Change colors, wording, couple names, date, venue and map URL there if needed.
 
+
+### Invitation design update
+The invitation now includes a mobile-first opening screen with an animated 2D couple illustration, a user-initiated background music player, a responsive embedded HikkaTranz map, larger guest names, and additional mobile spacing/sizing improvements. The music file is `public/music/homecoming-theme.wav`. Replace it with another `.wav` or `.mp3` file if you want a different song, then update the `src` in `components/InvitationClient.tsx`.

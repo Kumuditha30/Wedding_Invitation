@@ -621,3 +621,143 @@ a {
     grid-column: auto;
   }
 }
+
+/* --- Invitation opening, couple animation and mobile-first enhancements --- */
+.opening-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(179,19,43,.22), transparent 30rem),
+    #030303;
+  animation: openingFade .45s ease forwards;
+}
+
+.opening-card {
+  width: min(620px, 100%);
+  text-align: center;
+  padding: 34px 24px 30px;
+  border: 1px solid rgba(239,35,76,.28);
+  border-radius: 30px;
+  background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.012));
+  box-shadow: 0 30px 100px rgba(0,0,0,.6), 0 0 60px rgba(179,19,43,.12);
+  backdrop-filter: blur(16px);
+  animation: cardRise .7s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.opening-kicker { color: var(--red-bright); text-transform: uppercase; letter-spacing: .3em; font-size: .65rem; }
+.opening-title { font: 400 clamp(2rem, 8vw, 3.6rem)/1 Georgia, serif; margin-top: 2px; }
+.opening-title span { color: var(--red-bright); font-style: italic; }
+.opening-subtitle { color: var(--muted); font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; margin: 14px 0 22px; }
+.opening-note { color: #686365; font-size: .68rem; margin: 11px 0 0; }
+
+.couple-art { width: min(360px, 82vw); margin: 4px auto -2px; filter: drop-shadow(0 18px 35px rgba(179,19,43,.16)); }
+.couple-art svg { width: 100%; height: auto; overflow: visible; }
+.couple-float { transform-origin: center; animation: coupleFloat 3.5s ease-in-out infinite; }
+.heart-float { transform-origin: 210px 70px; animation: heartFloat 2.8s ease-in-out infinite; }
+
+.open-invitation {
+  border: 1px solid var(--red-bright);
+  background: linear-gradient(135deg, #8f1025, #d71940);
+  color: #fff;
+  min-height: 52px;
+  padding: 0 28px;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  box-shadow: 0 10px 35px rgba(239,35,76,.2);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.open-invitation:hover { transform: translateY(-2px); box-shadow: 0 14px 42px rgba(239,35,76,.3); }
+.open-invitation span { margin-left: 8px; }
+
+.music-control {
+  position: fixed;
+  z-index: 30;
+  top: max(16px, env(safe-area-inset-top));
+  right: max(16px, env(safe-area-inset-right));
+  border: 1px solid rgba(239,35,76,.35);
+  background: rgba(5,5,5,.72);
+  color: #eee;
+  backdrop-filter: blur(12px);
+  border-radius: 999px;
+  padding: 9px 13px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: .7rem;
+}
+.music-bars { display: flex; gap: 2px; height: 15px; align-items: end; }
+.music-bars i { display:block; width: 2px; height: 6px; background: var(--red-bright); border-radius: 2px; }
+.music-bars.playing i:nth-child(1) { animation: musicBar .65s ease-in-out infinite alternate; }
+.music-bars.playing i:nth-child(2) { animation: musicBar .45s ease-in-out infinite alternate-reverse; }
+.music-bars.playing i:nth-child(3) { animation: musicBar .55s ease-in-out infinite alternate; }
+
+.guest-name { display: inline-block; color: var(--white); font-size: clamp(1.12rem, 3.5vw, 1.45rem); line-height: 1.25; }
+
+.map-frame-wrap {
+  width: 100%;
+  height: min(420px, 60vw);
+  min-height: 250px;
+  margin: 28px 0 18px;
+  overflow: hidden;
+  border-radius: 22px;
+  border: 1px solid rgba(239,35,76,.22);
+  background: #080808;
+  box-shadow: 0 20px 60px rgba(0,0,0,.3);
+}
+.map-frame-wrap iframe { width: 100%; height: 100%; border: 0; display: block; filter: grayscale(.85) contrast(1.05) brightness(.72); }
+
+@keyframes openingFade { from { opacity: 1; } to { opacity: 1; } }
+@keyframes cardRise { from { opacity: 0; transform: translateY(22px) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes coupleFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+@keyframes heartFloat { 0%,100% { transform: translateY(0) scale(1); opacity: .75; } 50% { transform: translateY(-10px) scale(1.08); opacity: 1; } }
+@keyframes musicBar { from { height: 5px; } to { height: 15px; } }
+
+@media (max-width: 560px) {
+  .opening-screen { padding: 12px; }
+  .opening-card { padding: 26px 16px 24px; border-radius: 24px; }
+  .couple-art { width: min(320px, 88vw); }
+  .opening-subtitle { line-height: 1.6; letter-spacing: .08em; }
+  .open-invitation { width: 100%; min-height: 54px; }
+  .music-control { top: auto; right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); }
+
+  .hero { min-height: 100svh; padding: 76px 18px 54px; }
+  .hero::before { width: 330px; height: 330px; }
+  .hero::after { width: 390px; height: 390px; }
+  .kicker { font-size: .58rem; letter-spacing: .2em; line-height: 1.7; max-width: 300px; margin: 0 auto 18px; }
+  .hero-title { font-size: clamp(3.55rem, 19vw, 6rem); line-height: .82; }
+  .hero-date { margin-top: 25px; font-size: .72rem; letter-spacing: .15em; }
+  .guest-line { max-width: 330px; font-size: .9rem; line-height: 1.7; margin-top: 4px; }
+  .guest-name { font-size: 1.22rem; }
+  .scroll-note { bottom: 18px; font-size: .58rem; }
+
+  .section { width: min(100% - 28px, 1080px); padding: 64px 0; }
+  .section-title { font-size: clamp(2.35rem, 12vw, 3.5rem); }
+  .intro { font-size: .94rem; line-height: 1.8; }
+  .countdown { gap: 7px; margin-top: 28px; }
+  .time-box { padding: 15px 5px; border-radius: 11px; }
+  .time-number { font-size: 1.65rem; }
+  .time-label { font-size: .52rem; letter-spacing: .1em; }
+
+  .info-grid { grid-template-columns: 1fr; gap: 10px; margin-top: 26px; }
+  .info-card { padding: 22px; border-radius: 16px; }
+  .venue-box { padding: 36px 16px; border-radius: 22px; }
+  .venue-name { font-size: clamp(1.9rem, 10vw, 3rem); }
+  .map-frame-wrap { height: 300px; min-height: 300px; margin-top: 22px; border-radius: 18px; }
+  .map-button { width: 100%; min-height: 50px; }
+
+  .rsvp-card { padding: 32px 16px; border-radius: 18px; }
+  .rsvp-options { grid-template-columns: 1fr; gap: 10px; }
+  .rsvp-option { min-height: 94px; }
+  .message-box { min-height: 110px; }
+  .rsvp-submit { min-height: 54px; }
+  .footer { padding: 60px 16px 88px; line-height: 1.8; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+}
