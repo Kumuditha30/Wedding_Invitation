@@ -130,12 +130,13 @@ export default function InvitationClient({ guest }: { guest: Guest }) {
         <div className="opening-screen">
           <div className="opening-card">
             <div className="opening-kicker">You are invited</div>
-            
+
             <div className="opening-title">Sachintha <span>&amp;</span> Ranumi</div>
             <div className="opening-subtitle">The Homecoming • December 5th, 2026</div>
             <button className="open-invitation" type="button" onClick={openInvitation}>
               Open Invitation <span>♥</span>
             </button>
+            <br></br>
             <p className="opening-note">Tap to open with music</p>
           </div>
         </div>
@@ -162,7 +163,7 @@ export default function InvitationClient({ guest }: { guest: Guest }) {
 
           <div className="hero-rule" />
           <div className="hero-date">{wedding.dateLabel}</div>
-
+          <br></br>
           <p className="guest-line">
             This invitation is lovingly reserved for{" "}
             <strong className="guest-name">{guest.name}</strong>.
