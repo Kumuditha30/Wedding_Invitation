@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
         invitation_code: await generateInvitationCode(),
         name: row.name.slice(0, 150),
         seats: row.seats,
-        rsvp_status: "pending"
+        rsvp_status: "pending" as const
       });
     }
 
