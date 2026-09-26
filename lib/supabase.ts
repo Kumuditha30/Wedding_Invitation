@@ -1,8 +1,53 @@
-import { createClient } from "@supabase/supabase-js";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
-let cachedClient: ReturnType<typeof createClient> | null = null;
+// Keep the database shape explicit so Supabase's TypeScript client does not
+// infer table rows/inserts as `never` during the Vercel build.
+export type GuestRow = {
+  id: string;
+  invitation_code: string;
+  name: string;
+  seats: number;
+  attendee_count: number | null;
+  rsvp_status: "pending" | "attending" | "declined";
+  message: string | null;
+  created_at: string;
+  updated_at: string;
+  rsvp_at: string | null;
+};
 
-export function getSupabaseAdmin() {
+export type GuestInsert = {
+  id?: string;
+  invitation_code: string;
+  name: string;
+  seats?: number;
+  attendee_count?: number | null;
+  rsvp_status?: "pending" | "attending" | "declined";
+  message?: string | null;
+  created_at?: string;
+  updated_at?: string;
+  rsvp_at?: string | null;
+};
+
+export type Database = {
+  public: {
+    Tables: {
+      guests: {
+        Row: GuestRow;
+        Insert: GuestInsert;
+        Update: Partial<GuestInsert>;
+        Relationships: [];
+      };
+    };
+    Views: Record<string, never>;
+    Functions: Record<string, never>;
+    Enums: Record<string, never>;
+    CompositeTypes: Record<string, never>;
+  };
+};
+
+let cachedClient: SupabaseClient<Database> | null = null;
+
+export function getSupabaseAdmin(): SupabaseClient<Database> {
   if (cachedClient) return cachedClient;
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -14,7 +59,7 @@ export function getSupabaseAdmin() {
     );
   }
 
-  cachedClient = createClient(url, serviceRoleKey, {
+  cachedClient = createClient<Database>(url, serviceRoleKey, {
     auth: {
       autoRefreshToken: false,
       persistSession: false
