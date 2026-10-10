@@ -54,9 +54,9 @@ function Countdown() {
   );
 }
 
-function MehendiBackdrop() {
+function MehendiBackdrop({ isOpening = false }: { isOpening?: boolean }) {
   return (
-    <div className="mehendi-backdrop" aria-hidden="true">
+    <div className={`mehendi-backdrop${isOpening ? " mehendi-backdrop--opening" : ""}`} aria-hidden="true">
       <svg className="mehendi-vine mehendi-vine--left" viewBox="0 0 260 640" fill="none">
         <path d="M34 638C76 554 63 495 111 430S192 331 151 263 79 179 134 104 201 39 214 3" />
         <path d="M76 549c-42-10-58-38-55-70 33 4 54 28 55 70Zm45-119c43-3 65-26 74-58-34-2-63 17-74 58Zm-3-119c-41-13-53-42-47-73 32 8 52 34 47 73Zm30-121c38 7 65-10 80-40-32-10-65 2-80 40Z" />
@@ -171,12 +171,8 @@ export default function InvitationClient({ guest }: { guest: Guest }) {
   const [saved, setSaved] = useState(false);
   const [opened, setOpened] = useState(false);
   const [opening, setOpening] = useState(false);
-  const [doorAnimationStarted, setDoorAnimationStarted] = useState(false);
-  const [doorPlayToken, setDoorPlayToken] = useState("");
-  const [doorAnimationReady, setDoorAnimationReady] = useState(false);
   const [musicOn, setMusicOn] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const openingTimerStartedRef = useRef(false);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -185,57 +181,16 @@ export default function InvitationClient({ guest }: { guest: Guest }) {
     audio.volume = 0.38;
   }, []);
 
-  useEffect(() => {
-    const media = window.matchMedia("(max-width: 560px)");
-    let active = true;
-    let preload: HTMLImageElement | null = null;
-
-    const prepareDoorAnimation = () => {
-      setDoorAnimationReady(false);
-      preload = new window.Image();
-      preload.onload = () => { if (active) setDoorAnimationReady(true); };
-      preload.onerror = () => { if (active) setDoorAnimationReady(true); };
-      preload.src = media.matches
-        ? "/images/royal-mehendi-doors-opening-mobile.webp"
-        : "/images/royal-mehendi-doors-opening.webp";
-      if (preload.complete && preload.naturalWidth > 0) setDoorAnimationReady(true);
-    };
-
-    prepareDoorAnimation();
-    media.addEventListener("change", prepareDoorAnimation);
-    return () => {
-      active = false;
-      media.removeEventListener("change", prepareDoorAnimation);
-      if (preload) {
-        preload.onload = null;
-        preload.onerror = null;
-      }
-    };
-  }, []);
-
-  async function openInvitation() {
-    if (opening || !doorAnimationReady) return;
-    openingTimerStartedRef.current = false;
-    setDoorAnimationStarted(false);
-    setDoorPlayToken(String(Date.now()));
+  function openInvitation() {
+    if (opening) return;
     setOpening(true);
+    const revealDuration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 120 : 2550;
+    window.setTimeout(() => setOpened(true), revealDuration);
 
     const audio = audioRef.current;
     if (audio) {
-      try {
-        await audio.play();
-        setMusicOn(true);
-      } catch {
-        setMusicOn(false);
-      }
+      void audio.play().then(() => setMusicOn(true)).catch(() => setMusicOn(false));
     }
-  }
-
-  function startDoorAnimation() {
-    if (!opening || openingTimerStartedRef.current) return;
-    openingTimerStartedRef.current = true;
-    setDoorAnimationStarted(true);
-    window.setTimeout(() => setOpened(true), 2450);
   }
 
   async function toggleMusic() {
@@ -279,48 +234,55 @@ export default function InvitationClient({ guest }: { guest: Guest }) {
     <main className="invitation-page">
       <audio ref={audioRef} src="/music/homecoming-theme.wav" preload="auto" aria-hidden="true" />
 
-      <MehendiBackdrop />
+      <MehendiBackdrop isOpening={!opened} />
 
       {!opened && (
-        <div className={`opening-screen ${doorAnimationStarted ? "is-opening" : ""}`}>
-          <div className="opening-doors" aria-hidden="true">
-            <picture className="opening-door-closed">
-              <source media="(max-width: 560px)" srcSet="/images/royal-mehendi-doors-mobile.jpg" />
-              <img src="/images/royal-mehendi-doors.jpg" alt="" />
-            </picture>
-            <picture className="opening-door-art">
-              <source
-                type="image/webp"
-                media="(max-width: 560px)"
-                srcSet={opening ? `/images/royal-mehendi-doors-opening-mobile.webp?play=${doorPlayToken}` : undefined}
-              />
-              <source
-                media="(max-width: 560px)"
-                srcSet={opening ? `/images/royal-mehendi-doors-opening-mobile.gif?play=${doorPlayToken}` : "/images/royal-mehendi-doors-mobile.jpg"}
-              />
-              <source
-                type="image/webp"
-                srcSet={opening ? `/images/royal-mehendi-doors-opening.webp?play=${doorPlayToken}` : undefined}
-              />
-              <img
-                key={opening ? "opening" : "closed"}
-                src={opening ? `/images/royal-mehendi-doors-opening.gif?play=${doorPlayToken}` : "/images/royal-mehendi-doors.jpg"}
-                alt=""
-                onLoad={opening ? startDoorAnimation : undefined}
-                onError={opening ? startDoorAnimation : undefined}
-              />
-            </picture>
-          </div>
-          <div className="opening-card">
-            <div className="opening-card-frame">
-              <div className="opening-kicker">A celebration of love</div>
-              <div className="opening-title">Sachintha <span>&amp;</span> Ranumi</div>
-              <div className="opening-subtitle">The Homecoming • December 5th, 2026</div>
-              <div className="opening-seal" aria-hidden="true">S <span>&amp;</span> R</div>
-              <button className="open-invitation" type="button" onClick={openInvitation} disabled={opening || !doorAnimationReady}>
-                {opening ? "Opening…" : doorAnimationReady ? "Open Invitation" : "Preparing doors…"} <span aria-hidden="true">✦</span>
-              </button>
-              <p className="opening-note">{doorAnimationReady ? "Tap to open the doors" : "Preparing the royal doors"}</p>
+        <div className={`opening-screen${opening ? " is-opening" : ""}`}>
+          <div className="opening-layout">
+            <div className="envelope-stage" aria-hidden="true">
+              <div className="envelope-aura" />
+              <div className="invitation-letter">
+                <div className="letter-frame">
+                  <span className="letter-ornament">❦</span>
+                  <span className="letter-kicker">The Homecoming</span>
+                  <span className="letter-couple">Sachintha <i>&amp;</i> Ranumi</span>
+                  <span className="letter-divider">✦</span>
+                  <span className="letter-date">{wedding.dateLabel}</span>
+                </div>
+              </div>
+              <div className="envelope-shell">
+                <div className="envelope-back" />
+                <div className="envelope-side envelope-side--left" />
+                <div className="envelope-side envelope-side--right" />
+                <div className="envelope-front">
+                  <svg className="envelope-etching" viewBox="0 0 560 300" fill="none">
+                    <path d="M26 248c83-2 102-65 142-93 39-27 78-24 112 24 35-48 73-51 112-24 41 28 60 91 142 93M31 267c74 0 98-47 138-72m222 0c40 25 64 72 138 72" />
+                    <path d="M280 116c26 19 41 40 41 58s-15 39-41 58c-26-19-41-40-41-58s15-39 41-58Z" />
+                    <circle cx="280" cy="174" r="18" />
+                    <path d="M280 156v36m-14-18h28m-24-11 20 22m0-22-20 22" />
+                    <path d="M156 155c-21-17-24-34-10-50 19 10 24 27 10 50Zm248 0c21-17 24-34 10-50-19 10-24 27-10 50ZM80 216c-22-8-31-24-25-43 23 3 34 18 25 43Zm400 0c22-8 31-24 25-43-23 3-34 18-25 43Z" />
+                    <circle cx="146" cy="105" r="4" /><circle cx="414" cy="105" r="4" />
+                    <circle cx="55" cy="173" r="4" /><circle cx="505" cy="173" r="4" />
+                  </svg>
+                </div>
+                <div className="envelope-flap" />
+                <div className="envelope-seal">
+                  <svg viewBox="0 0 48 48" fill="none">
+                    <circle cx="24" cy="24" r="17" />
+                    <circle cx="24" cy="24" r="12" />
+                    <path d="M24 12c5 4 6 8 0 12-6-4-5-8 0-12Zm0 12c6 4 6 8 0 12-6-4-6-8 0-12Zm0 0c-5-4-9-4-12 0 3 5 7 5 12 0Zm0 0c5-4 9-4 12 0-3 5-7 5-12 0Z" />
+                    <circle cx="24" cy="24" r="2" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div className="opening-card">
+              <div className="opening-card-frame">
+                <div className="opening-title">Sachintha <span>&amp;</span> Ranumi</div>
+                <button className="open-invitation" type="button" onClick={openInvitation} disabled={opening}>
+                  {opening ? "Opening invitation" : "Open invitation"} <span aria-hidden="true">✦</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
