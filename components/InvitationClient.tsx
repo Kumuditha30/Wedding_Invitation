@@ -70,6 +70,40 @@ function MehendiBackdrop() {
         <circle cx="143" cy="263" r="23" /><circle cx="143" cy="263" r="10" />
         <circle cx="111" cy="430" r="18" /><circle cx="111" cy="430" r="7" />
       </svg>
+      <svg className="mehendi-medallion mehendi-medallion--upper" viewBox="0 0 260 260" fill="none">
+        <circle cx="130" cy="130" r="108" />
+        <circle cx="130" cy="130" r="94" />
+        <circle cx="130" cy="130" r="67" />
+        {Array.from({ length: 16 }, (_, index) => (
+          <g key={index} transform={`rotate(${index * 22.5} 130 130)`}>
+            <path d="M130 17c13 18 13 34 0 50-13-16-13-32 0-50Z" />
+            <path d="M130 25v30m-5-13 5 5 5-5" />
+          </g>
+        ))}
+        <path d="M130 99c18 10 31 24 31 31s-13 21-31 31c-18-10-31-24-31-31s13-21 31-31Z" />
+        <circle cx="130" cy="130" r="11" />
+        <circle cx="130" cy="130" r="4" />
+        <path d="M36 130h13m162 0h13M130 36v13m0 162v13" />
+        <circle cx="36" cy="130" r="2" /><circle cx="224" cy="130" r="2" />
+        <circle cx="130" cy="36" r="2" /><circle cx="130" cy="224" r="2" />
+      </svg>
+      <svg className="mehendi-medallion mehendi-medallion--lower" viewBox="0 0 260 260" fill="none">
+        <circle cx="130" cy="130" r="108" />
+        <circle cx="130" cy="130" r="94" />
+        <circle cx="130" cy="130" r="67" />
+        {Array.from({ length: 16 }, (_, index) => (
+          <g key={index} transform={`rotate(${index * 22.5} 130 130)`}>
+            <path d="M130 17c13 18 13 34 0 50-13-16-13-32 0-50Z" />
+            <path d="M130 25v30m-5-13 5 5 5-5" />
+          </g>
+        ))}
+        <path d="M130 99c18 10 31 24 31 31s-13 21-31 31c-18-10-31-24-31-31s13-21 31-31Z" />
+        <circle cx="130" cy="130" r="11" />
+        <circle cx="130" cy="130" r="4" />
+        <path d="M36 130h13m162 0h13M130 36v13m0 162v13" />
+        <circle cx="36" cy="130" r="2" /><circle cx="224" cy="130" r="2" />
+        <circle cx="130" cy="36" r="2" /><circle cx="130" cy="224" r="2" />
+      </svg>
     </div>
   );
 }
@@ -159,7 +193,7 @@ export default function InvitationClient({ guest }: { guest: Guest }) {
     if (opening) return;
     setOpening(true);
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    window.setTimeout(() => setOpened(true), reducedMotion ? 80 : 1280);
+    window.setTimeout(() => setOpened(true), reducedMotion ? 80 : 1900);
 
     const audio = audioRef.current;
     if (audio) {
@@ -218,8 +252,17 @@ export default function InvitationClient({ guest }: { guest: Guest }) {
       {!opened && (
         <div className={`opening-screen ${opening ? "is-opening" : ""}`}>
           <div className="opening-doors" aria-hidden="true">
-            <div className="opening-door opening-door--left"><span className="door-rosette">✿</span></div>
-            <div className="opening-door opening-door--right"><span className="door-rosette">✿</span></div>
+            <picture className="opening-door-art">
+              <source
+                media="(max-width: 560px)"
+                srcSet={opening ? "/images/royal-mehendi-doors-opening-mobile.gif" : "/images/royal-mehendi-doors-mobile.jpg"}
+              />
+              <img
+                key={opening ? "opening" : "closed"}
+                src={opening ? "/images/royal-mehendi-doors-opening.gif" : "/images/royal-mehendi-doors.jpg"}
+                alt=""
+              />
+            </picture>
           </div>
           <div className="opening-card">
             <div className="opening-card-frame">
@@ -228,7 +271,7 @@ export default function InvitationClient({ guest }: { guest: Guest }) {
               <div className="opening-subtitle">The Homecoming • December 5th, 2026</div>
               <div className="opening-seal" aria-hidden="true">S <span>&amp;</span> R</div>
               <button className="open-invitation" type="button" onClick={openInvitation} disabled={opening}>
-                {opening ? "With love…" : "Open Invitation"} <span>♥</span>
+                {opening ? "With love…" : "Open Invitation"} <span aria-hidden="true">✦</span>
               </button>
               <p className="opening-note">Tap to open the doors</p>
             </div>
