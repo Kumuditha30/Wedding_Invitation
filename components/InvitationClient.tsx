@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { wedding } from "@/lib/wedding";
 
 type Guest = {
@@ -60,6 +61,8 @@ function MehendiBackdrop() {
         <path d="M34 638C76 554 63 495 111 430S192 331 151 263 79 179 134 104 201 39 214 3" />
         <path d="M76 549c-42-10-58-38-55-70 33 4 54 28 55 70Zm45-119c43-3 65-26 74-58-34-2-63 17-74 58Zm-3-119c-41-13-53-42-47-73 32 8 52 34 47 73Zm30-121c38 7 65-10 80-40-32-10-65 2-80 40Z" />
         <path d="M104 465c-7-27-1-50 19-66 18 23 14 48-19 66Zm34-147c4-29 19-47 44-53 9 28-5 51-44 53Zm-13-133c-2-28 9-49 33-61 15 25 7 50-33 61Z" />
+        <path d="M48 599c-19-8-26-26-18-43 21 4 31 20 18 43Zm42-67c-27-4-37-23-31-43 23 3 37 19 31 43Zm55-83c-28 5-44-9-42-30 22-7 39 4 42 30Zm-22-97c20 8 37-1 43-20-19-10-37-3-43 20Zm37-84c-27-3-38-21-32-41 21 3 34 18 32 41Zm43-81c-21 5-33-7-30-24 17-7 30 2 30 24Z" />
+        <path d="M80 578c13-14 30-13 37 1 7 15-11 27-19 16-5-7 1-14 7-11m44-109c-12-16-5-32 9-34 15-2 19 18 7 22-7 2-11-5-6-9m31-107c15-12 32-7 35 7 3 15-16 21-21 10-3-7 4-12 9-7" />
         <circle cx="143" cy="263" r="23" /><circle cx="143" cy="263" r="10" />
         <circle cx="111" cy="430" r="18" /><circle cx="111" cy="430" r="7" />
       </svg>
@@ -67,8 +70,24 @@ function MehendiBackdrop() {
         <path d="M34 638C76 554 63 495 111 430S192 331 151 263 79 179 134 104 201 39 214 3" />
         <path d="M76 549c-42-10-58-38-55-70 33 4 54 28 55 70Zm45-119c43-3 65-26 74-58-34-2-63 17-74 58Zm-3-119c-41-13-53-42-47-73 32 8 52 34 47 73Zm30-121c38 7 65-10 80-40-32-10-65 2-80 40Z" />
         <path d="M104 465c-7-27-1-50 19-66 18 23 14 48-19 66Zm34-147c4-29 19-47 44-53 9 28-5 51-44 53Zm-13-133c-2-28 9-49 33-61 15 25 7 50-33 61Z" />
+        <path d="M48 599c-19-8-26-26-18-43 21 4 31 20 18 43Zm42-67c-27-4-37-23-31-43 23 3 37 19 31 43Zm55-83c-28 5-44-9-42-30 22-7 39 4 42 30Zm-22-97c20 8 37-1 43-20-19-10-37-3-43 20Zm37-84c-27-3-38-21-32-41 21 3 34 18 32 41Zm43-81c-21 5-33-7-30-24 17-7 30 2 30 24Z" />
+        <path d="M80 578c13-14 30-13 37 1 7 15-11 27-19 16-5-7 1-14 7-11m44-109c-12-16-5-32 9-34 15-2 19 18 7 22-7 2-11-5-6-9m31-107c15-12 32-7 35 7 3 15-16 21-21 10-3-7 4-12 9-7" />
         <circle cx="143" cy="263" r="23" /><circle cx="143" cy="263" r="10" />
         <circle cx="111" cy="430" r="18" /><circle cx="111" cy="430" r="7" />
+      </svg>
+      <svg className="mehendi-vine mehendi-vine--left mehendi-vine--secondary" viewBox="0 0 260 640" fill="none">
+        <path d="M16 638c45-49 36-95 80-128s79-57 63-108-63-78-33-135 82-74 50-126S128 65 175 4" />
+        <path d="M58 573c-26-5-39-22-34-44 24 2 39 18 34 44Zm48-64c-25 4-40-10-39-31 21-6 38 4 39 31Zm31-104c22 7 39-3 43-24-20-9-39 0-43 24Zm-2-122c-26-6-35-25-27-45 22 5 34 22 27 45Zm28-111c19 9 37 2 44-17-18-12-38-7-44 17Zm-7-99c-20-6-27-22-18-38 18 4 27 18 18 38Z" />
+        <path d="M81 554c-2-22 10-37 29-38 8 20-2 36-29 38Zm44-106c-14-18-8-36 9-40 16 12 14 31-9 40Zm9-124c12-20 31-23 44-9-6 21-22 29-44 9Zm28-110c-8-20 1-37 20-41 13 17 7 34-20 41Z" />
+        <circle cx="127" cy="302" r="15" /><circle cx="127" cy="302" r="5" />
+        <circle cx="159" cy="176" r="12" /><circle cx="159" cy="176" r="4" />
+      </svg>
+      <svg className="mehendi-vine mehendi-vine--right mehendi-vine--secondary" viewBox="0 0 260 640" fill="none">
+        <path d="M16 638c45-49 36-95 80-128s79-57 63-108-63-78-33-135 82-74 50-126S128 65 175 4" />
+        <path d="M58 573c-26-5-39-22-34-44 24 2 39 18 34 44Zm48-64c-25 4-40-10-39-31 21-6 38 4 39 31Zm31-104c22 7 39-3 43-24-20-9-39 0-43 24Zm-2-122c-26-6-35-25-27-45 22 5 34 22 27 45Zm28-111c19 9 37 2 44-17-18-12-38-7-44 17Zm-7-99c-20-6-27-22-18-38 18 4 27 18 18 38Z" />
+        <path d="M81 554c-2-22 10-37 29-38 8 20-2 36-29 38Zm44-106c-14-18-8-36 9-40 16 12 14 31-9 40Zm9-124c12-20 31-23 44-9-6 21-22 29-44 9Zm28-110c-8-20 1-37 20-41 13 17 7 34-20 41Z" />
+        <circle cx="127" cy="302" r="15" /><circle cx="127" cy="302" r="5" />
+        <circle cx="159" cy="176" r="12" /><circle cx="159" cy="176" r="4" />
       </svg>
       <svg className="mehendi-medallion mehendi-medallion--upper" viewBox="0 0 260 260" fill="none">
         <circle cx="130" cy="130" r="108" />
@@ -104,70 +123,43 @@ function MehendiBackdrop() {
         <circle cx="36" cy="130" r="2" /><circle cx="224" cy="130" r="2" />
         <circle cx="130" cy="36" r="2" /><circle cx="130" cy="224" r="2" />
       </svg>
+      <svg className="mehendi-medallion mehendi-medallion--small mehendi-medallion--upper-left" viewBox="0 0 260 260" fill="none">
+        <circle cx="130" cy="130" r="108" /><circle cx="130" cy="130" r="94" />
+        {Array.from({ length: 12 }, (_, index) => (
+          <g key={index} transform={`rotate(${index * 30} 130 130)`}>
+            <path d="M130 25c17 15 20 32 0 52-20-20-17-37 0-52Z" />
+            <path d="M130 36v30m-7-12 7 6 7-6" />
+          </g>
+        ))}
+        <circle cx="130" cy="130" r="28" /><circle cx="130" cy="130" r="12" />
+        <path d="M130 102c10 10 10 18 0 28-10-10-10-18 0-28Zm0 28c10 10 10 18 0 28-10-10-10-18 0-28Zm0 0c-10 10-18 10-28 0 10-10 18-10 28 0Zm0 0c10-10 18-10 28 0-10 10-18 10-28 0Z" />
+      </svg>
+      <svg className="mehendi-medallion mehendi-medallion--small mehendi-medallion--lower-right" viewBox="0 0 260 260" fill="none">
+        <circle cx="130" cy="130" r="108" /><circle cx="130" cy="130" r="94" />
+        {Array.from({ length: 12 }, (_, index) => (
+          <g key={index} transform={`rotate(${index * 30} 130 130)`}>
+            <path d="M130 25c17 15 20 32 0 52-20-20-17-37 0-52Z" />
+            <path d="M130 36v30m-7-12 7 6 7-6" />
+          </g>
+        ))}
+        <circle cx="130" cy="130" r="28" /><circle cx="130" cy="130" r="12" />
+        <path d="M130 102c10 10 10 18 0 28-10-10-10-18 0-28Zm0 28c10 10 10 18 0 28-10-10-10-18 0-28Zm0 0c-10 10-18 10-28 0 10-10 18-10 28 0Zm0 0c10-10 18-10 28 0-10 10-18 10-28 0Z" />
+      </svg>
     </div>
   );
 }
 
 function CoupleIllustration() {
   return (
-    <svg viewBox="0 0 480 360" role="img" aria-label="An illustrated couple: the groom in a black suit and glasses beside the bride in a red dress">
-      <defs>
-        <linearGradient id="brideDress" x1="266" y1="154" x2="338" y2="340" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#d32242" />
-          <stop offset="1" stopColor="#650d20" />
-        </linearGradient>
-        <linearGradient id="veil" x1="268" y1="44" x2="368" y2="275" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#ef234c" stopOpacity=".62" />
-          <stop offset="1" stopColor="#8f1025" stopOpacity=".16" />
-        </linearGradient>
-        <radialGradient id="coupleHalo" cx="0" cy="0" r="1" gradientTransform="matrix(0 145 -180 0 240 179)" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#b3132b" stopOpacity=".2" />
-          <stop offset="1" stopColor="#b3132b" stopOpacity="0" />
-        </radialGradient>
-      </defs>
-      <ellipse cx="240" cy="184" rx="180" ry="145" fill="url(#coupleHalo)" />
-      <g className="couple-float">
-        <path d="M91 326c37-12 83-17 149-17 60 0 107 5 149 17" stroke="#c8a465" strokeOpacity=".45" strokeWidth="1.5" />
-        <path d="M113 325c25-61 54-102 91-120l39 37 35-37c38 18 70 59 92 120H113Z" fill="#080809" stroke="#c8a465" strokeOpacity=".58" strokeWidth="2" />
-        <path d="m187 205 42 36-18 84h-51l10-84-13-19 30-17Zm98 0-42 36 18 84h51l-10-84 13-19-30-17Z" fill="#101012" stroke="#2b2526" strokeWidth="2" />
-        <path d="m229 241 12 10 12-10 13 84h-50l13-84Z" fill="#f1e9df" />
-        <path d="m240 251 10 14-10 46-10-46 10-14Z" fill="#9f1730" />
-        <path d="m192 207 37 31-20 16-29-31 12-16Zm96 0-37 31 20 16 29-31-12-16Z" fill="#151517" stroke="#c8a465" strokeOpacity=".55" strokeWidth="1.5" />
-        <path d="M159 81c0-31 19-51 48-51 29 0 48 21 48 52v21c0 28-20 47-48 47s-48-19-48-47V81Z" fill="#c7896b" />
-        <path d="M155 89c-8-41 13-69 49-69 33 0 55 24 51 61l-8 13-8-27c-16 3-40-3-58-15-4 14-12 25-26 37Z" fill="#131214" />
-        <path d="M170 98c10-8 22-8 31 0m18 0c9-8 21-8 31 0" stroke="#30211e" strokeWidth="2" strokeLinecap="round" />
-        <g className="groom-glasses" fill="none" stroke="#171415" strokeWidth="4">
-          <rect x="166" y="89" width="25" height="19" rx="5" />
-          <rect x="207" y="89" width="25" height="19" rx="5" />
-          <path d="M191 96h16m25-1 8-4" strokeLinecap="round" />
-        </g>
-        <path d="M193 124c8 6 18 6 26 0" stroke="#8b493f" strokeWidth="2" strokeLinecap="round" />
-        <path d="M202 145v21m12-21v21" stroke="#bd795f" strokeWidth="8" />
-        <path d="M164 59c15-19 43-24 66-10" stroke="#c8a465" strokeWidth="2" strokeLinecap="round" />
-        <g className="bride-sway">
-          <path className="bride-veil" d="M259 77c-1-33 18-54 48-54 31 0 51 22 51 57 0 52 10 104 41 146-38 30-74 47-112 51-30-45-47-97-45-200Z" fill="url(#veil)" stroke="#c8a465" strokeOpacity=".5" strokeWidth="2" />
-          <path d="M269 80c0-29 17-48 41-48s41 19 41 48v26c0 27-17 45-41 45s-41-18-41-45V80Z" fill="#d59a7b" />
-          <path d="M265 91c-5-37 15-63 46-63 27 0 45 18 46 49l-9 15-6-26c-18 4-45-3-60-18-1 15-7 29-17 43Z" fill="#241518" />
-          <path d="M276 100c8-6 16-6 23 0m20 0c7-6 15-6 22 0" stroke="#59302b" strokeWidth="2" strokeLinecap="round" />
-          <path d="M292 125c7 5 15 5 22 0" stroke="#974c47" strokeWidth="2" strokeLinecap="round" />
-          <path d="M296 146v21m13-21v21" stroke="#c98b70" strokeWidth="8" />
-          <path d="M264 204c14-14 33-22 56-22 20 0 39 8 53 22l36 119H234l30-119Z" fill="url(#brideDress)" stroke="#c8a465" strokeWidth="2" />
-          <path d="M266 211c19 14 36 18 54 18s37-5 53-18m-124 78c29 13 52 18 78 18 25 0 49-5 76-18" stroke="#e6bc75" strokeOpacity=".78" strokeWidth="2" />
-          <path d="M300 190h18m-9-9v18" stroke="#e6bc75" strokeWidth="2" strokeLinecap="round" />
-          <circle cx="309" cy="198" r="9" stroke="#e6bc75" strokeWidth="1.5" />
-        </g>
-        <path d="M272 209c-20 26-31 44-39 68" stroke="#c7896b" strokeWidth="8" strokeLinecap="round" />
-        <path d="M265 206c8 12 14 21 22 27" stroke="#d59a7b" strokeWidth="8" strokeLinecap="round" />
-        <path d="M215 67c4-10 12-15 22-15" stroke="#c8a465" strokeWidth="2" strokeLinecap="round" />
-      </g>
-      <g className="heart-float" fill="#ef234c">
-        <path d="M241 77c-11-10-24 7 0 22 24-15 11-32 0-22Z" />
-      </g>
-      <g className="couple-sparkles" fill="#e6bc75">
-        <path d="M112 124v14m-7-7h14M370 115v12m-6-6h12M387 215v10m-5-5h10" />
-        <circle cx="112" cy="124" r="2" /><circle cx="370" cy="115" r="2" />
-      </g>
-    </svg>
+    <Image
+      className="couple-portrait"
+      src="/images/couple-faceless-realistic.png"
+      alt="A hand-painted, faceless 2D wedding illustration of a groom in a black salwar kameez and glasses beside a bride in a blood-red embroidered lehenga"
+      width={1024}
+      height={1536}
+      loading="eager"
+      decoding="async"
+    />
   );
 }
 
@@ -179,8 +171,12 @@ export default function InvitationClient({ guest }: { guest: Guest }) {
   const [saved, setSaved] = useState(false);
   const [opened, setOpened] = useState(false);
   const [opening, setOpening] = useState(false);
+  const [doorAnimationStarted, setDoorAnimationStarted] = useState(false);
+  const [doorPlayToken, setDoorPlayToken] = useState("");
+  const [doorAnimationReady, setDoorAnimationReady] = useState(false);
   const [musicOn, setMusicOn] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const openingTimerStartedRef = useRef(false);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -189,11 +185,40 @@ export default function InvitationClient({ guest }: { guest: Guest }) {
     audio.volume = 0.38;
   }, []);
 
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 560px)");
+    let active = true;
+    let preload: HTMLImageElement | null = null;
+
+    const prepareDoorAnimation = () => {
+      setDoorAnimationReady(false);
+      preload = new window.Image();
+      preload.onload = () => { if (active) setDoorAnimationReady(true); };
+      preload.onerror = () => { if (active) setDoorAnimationReady(true); };
+      preload.src = media.matches
+        ? "/images/royal-mehendi-doors-opening-mobile.webp"
+        : "/images/royal-mehendi-doors-opening.webp";
+      if (preload.complete && preload.naturalWidth > 0) setDoorAnimationReady(true);
+    };
+
+    prepareDoorAnimation();
+    media.addEventListener("change", prepareDoorAnimation);
+    return () => {
+      active = false;
+      media.removeEventListener("change", prepareDoorAnimation);
+      if (preload) {
+        preload.onload = null;
+        preload.onerror = null;
+      }
+    };
+  }, []);
+
   async function openInvitation() {
-    if (opening) return;
+    if (opening || !doorAnimationReady) return;
+    openingTimerStartedRef.current = false;
+    setDoorAnimationStarted(false);
+    setDoorPlayToken(String(Date.now()));
     setOpening(true);
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    window.setTimeout(() => setOpened(true), reducedMotion ? 80 : 1900);
 
     const audio = audioRef.current;
     if (audio) {
@@ -204,6 +229,13 @@ export default function InvitationClient({ guest }: { guest: Guest }) {
         setMusicOn(false);
       }
     }
+  }
+
+  function startDoorAnimation() {
+    if (!opening || openingTimerStartedRef.current) return;
+    openingTimerStartedRef.current = true;
+    setDoorAnimationStarted(true);
+    window.setTimeout(() => setOpened(true), 2450);
   }
 
   async function toggleMusic() {
@@ -250,17 +282,32 @@ export default function InvitationClient({ guest }: { guest: Guest }) {
       <MehendiBackdrop />
 
       {!opened && (
-        <div className={`opening-screen ${opening ? "is-opening" : ""}`}>
+        <div className={`opening-screen ${doorAnimationStarted ? "is-opening" : ""}`}>
           <div className="opening-doors" aria-hidden="true">
+            <picture className="opening-door-closed">
+              <source media="(max-width: 560px)" srcSet="/images/royal-mehendi-doors-mobile.jpg" />
+              <img src="/images/royal-mehendi-doors.jpg" alt="" />
+            </picture>
             <picture className="opening-door-art">
               <source
+                type="image/webp"
                 media="(max-width: 560px)"
-                srcSet={opening ? "/images/royal-mehendi-doors-opening-mobile.gif" : "/images/royal-mehendi-doors-mobile.jpg"}
+                srcSet={opening ? `/images/royal-mehendi-doors-opening-mobile.webp?play=${doorPlayToken}` : undefined}
+              />
+              <source
+                media="(max-width: 560px)"
+                srcSet={opening ? `/images/royal-mehendi-doors-opening-mobile.gif?play=${doorPlayToken}` : "/images/royal-mehendi-doors-mobile.jpg"}
+              />
+              <source
+                type="image/webp"
+                srcSet={opening ? `/images/royal-mehendi-doors-opening.webp?play=${doorPlayToken}` : undefined}
               />
               <img
                 key={opening ? "opening" : "closed"}
-                src={opening ? "/images/royal-mehendi-doors-opening.gif" : "/images/royal-mehendi-doors.jpg"}
+                src={opening ? `/images/royal-mehendi-doors-opening.gif?play=${doorPlayToken}` : "/images/royal-mehendi-doors.jpg"}
                 alt=""
+                onLoad={opening ? startDoorAnimation : undefined}
+                onError={opening ? startDoorAnimation : undefined}
               />
             </picture>
           </div>
@@ -270,10 +317,10 @@ export default function InvitationClient({ guest }: { guest: Guest }) {
               <div className="opening-title">Sachintha <span>&amp;</span> Ranumi</div>
               <div className="opening-subtitle">The Homecoming • December 5th, 2026</div>
               <div className="opening-seal" aria-hidden="true">S <span>&amp;</span> R</div>
-              <button className="open-invitation" type="button" onClick={openInvitation} disabled={opening}>
-                {opening ? "With love…" : "Open Invitation"} <span aria-hidden="true">✦</span>
+              <button className="open-invitation" type="button" onClick={openInvitation} disabled={opening || !doorAnimationReady}>
+                {opening ? "Opening…" : doorAnimationReady ? "Open Invitation" : "Preparing doors…"} <span aria-hidden="true">✦</span>
               </button>
-              <p className="opening-note">Tap to open the doors</p>
+              <p className="opening-note">{doorAnimationReady ? "Tap to open the doors" : "Preparing the royal doors"}</p>
             </div>
           </div>
         </div>

@@ -140,4 +140,4 @@ Change colors, wording, couple names, date, venue and map URL there if needed.
 
 
 ### Invitation design update
-The black and red Homecoming theme now opens on custom carved burgundy-and-gold palace doors. Clicking the invitation plays a one-shot opening GIF that reveals a warm palace hall; desktop and mobile use separately framed versions. The invitation also includes an animated couple illustration and a layered mehendi-inspired background. The opening button starts the optional music player; the music file is `public/music/homecoming-theme.wav`.
+The black and red Homecoming theme opens on custom carved burgundy-and-gold palace doors. Clicking the invitation starts a fresh, one-shot high-resolution opening animation with separately framed desktop and mobile scenes; animated WebP is used where supported, with GIF fallback. The page includes a layered mehendi-inspired background and a faceless, hand-painted 2D couple illustration: the groom wears a black salwar kameez and glasses, and the bride wears a blood-red embroidered lehenga. The opening button starts the optional music player; the music file is `public/music/homecoming-theme.wav`.

@@ -641,15 +641,15 @@ a {
 .mehendi-vine {
   position: absolute;
   top: 8vh;
-  width: clamp(128px, 20vw, 245px);
-  height: 84vh;
-  max-height: 760px;
-  stroke: rgba(218, 174, 107, .56);
-  stroke-width: 1.6;
+  width: clamp(158px, 23vw, 286px);
+  height: 86vh;
+  max-height: 790px;
+  stroke: rgba(225, 183, 109, .7);
+  stroke-width: 1.75;
   stroke-linecap: round;
   stroke-linejoin: round;
-  opacity: .23;
-  filter: drop-shadow(0 0 14px rgba(179, 19, 43, .16));
+  opacity: .3;
+  filter: drop-shadow(0 0 16px rgba(179, 19, 43, .2));
 }
 
 .mehendi-vine path:nth-child(2),
@@ -659,20 +659,26 @@ a {
 
 .mehendi-vine--left { left: -4.5vw; }
 .mehendi-vine--right { right: -4.5vw; transform: scaleX(-1); }
+.mehendi-vine--secondary { top: 17vh; width: clamp(112px, 15vw, 188px); height: 70vh; max-height: 670px; opacity: .17; }
+.mehendi-vine--secondary.mehendi-vine--left { left: 1.4vw; }
+.mehendi-vine--secondary.mehendi-vine--right { right: 1.4vw; }
 
 .mehendi-medallion {
   position: absolute;
-  width: clamp(170px, 25vw, 330px);
-  stroke: rgba(218, 174, 107, .62);
+  width: clamp(190px, 28vw, 360px);
+  stroke: rgba(225, 183, 109, .72);
   stroke-width: 1.35;
   stroke-linecap: round;
   stroke-linejoin: round;
-  opacity: .17;
-  filter: drop-shadow(0 0 20px rgba(179, 19, 43, .2));
+  opacity: .24;
+  filter: drop-shadow(0 0 22px rgba(179, 19, 43, .22));
 }
 
 .mehendi-medallion--upper { top: 5vh; right: 11vw; }
 .mehendi-medallion--lower { bottom: 4vh; left: 12vw; transform: rotate(14deg); }
+.mehendi-medallion--small { width: clamp(112px, 15vw, 184px); opacity: .2; }
+.mehendi-medallion--upper-left { top: 34vh; left: 2vw; transform: rotate(-12deg); }
+.mehendi-medallion--lower-right { right: 3vw; bottom: 27vh; transform: rotate(12deg); }
 
 .opening-screen {
   position: fixed;
@@ -684,7 +690,7 @@ a {
   padding: 0 22px max(24px, env(safe-area-inset-bottom));
   overflow: hidden;
   background: #030303;
-  transition: opacity .45s ease 1.45s;
+  transition: opacity .45s ease 1.95s;
 }
 
 .opening-doors {
@@ -695,7 +701,9 @@ a {
   background: #090506;
 }
 
+.opening-door-closed,
 .opening-door-art,
+.opening-door-closed img,
 .opening-door-art img {
   position: absolute;
   inset: 0;
@@ -704,6 +712,10 @@ a {
   height: 100%;
 }
 
+.opening-door-closed { z-index: 0; }
+.opening-door-art { z-index: 1; }
+
+.opening-door-closed img,
 .opening-door-art img {
   object-fit: cover;
   object-position: center;
@@ -760,14 +772,8 @@ a {
   filter: drop-shadow(0 18px 35px rgba(179,19,43,.16));
 }
 
-.couple-art--hero { width: min(320px, 72vw); margin: 12px auto 2px; }
-.couple-art svg { width: 100%; height: auto; overflow: visible; }
-.couple-float { transform-origin: center; animation: coupleFloat 3.5s ease-in-out infinite; }
-.bride-sway { transform-box: fill-box; transform-origin: 50% 48%; animation: brideSway 4.4s ease-in-out infinite; }
-.bride-veil { transform-box: fill-box; transform-origin: 55% 0%; animation: veilWave 3.8s ease-in-out infinite; }
-.groom-glasses { filter: drop-shadow(0 1px 1px rgba(0,0,0,.5)); }
-.heart-float { transform-box: fill-box; transform-origin: center; animation: heartFloat 2.8s ease-in-out infinite; }
-.couple-sparkles { animation: sparkle 2.6s ease-in-out infinite; }
+.couple-art--hero { width: min(300px, 72vw); height: min(45svh, 360px); margin: 12px auto 2px; }
+.couple-portrait { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center bottom; }
 
 .open-invitation {
   border: 1px solid #e0bd79;
@@ -840,19 +846,25 @@ a {
   .open-invitation { width: min(290px, 100%); min-height: 46px; }
   .music-control { top: auto; right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); }
 
-  .mehendi-vine { width: 140px; height: 70vh; top: 12vh; opacity: .17; }
-  .mehendi-vine--left { left: -58px; }
-  .mehendi-vine--right { right: -58px; }
-  .mehendi-medallion { width: 170px; opacity: .12; }
-  .mehendi-medallion--upper { top: 7vh; right: -48px; }
-  .mehendi-medallion--lower { bottom: 8vh; left: -47px; }
+  .mehendi-vine { width: 164px; height: 72vh; top: 12vh; opacity: .25; }
+  .mehendi-vine--left { left: -42px; }
+  .mehendi-vine--right { right: -42px; }
+  .mehendi-vine--secondary { width: 126px; height: 57vh; top: 19vh; opacity: .15; }
+  .mehendi-vine--secondary.mehendi-vine--left { left: 8px; }
+  .mehendi-vine--secondary.mehendi-vine--right { right: 8px; }
+  .mehendi-medallion { width: 180px; opacity: .19; }
+  .mehendi-medallion--upper { top: 7vh; right: -34px; }
+  .mehendi-medallion--lower { bottom: 8vh; left: -34px; }
+  .mehendi-medallion--small { width: 122px; opacity: .16; }
+  .mehendi-medallion--upper-left { top: 31vh; left: -28px; }
+  .mehendi-medallion--lower-right { right: -28px; bottom: 30vh; }
 
   .hero { min-height: 100svh; padding: 76px 18px 54px; }
   .hero::before { width: 330px; height: 330px; }
   .hero::after { width: 390px; height: 390px; }
   .kicker { font-size: .58rem; letter-spacing: .2em; line-height: 1.7; max-width: 300px; margin: 0 auto 18px; }
   .hero-title { font-size: clamp(3.55rem, 19vw, 6rem); line-height: .82; }
-  .couple-art--hero { width: min(286px, 74vw); margin-top: 15px; }
+  .couple-art--hero { width: min(260px, 70vw); height: min(42svh, 340px); margin-top: 15px; }
   .hero-date { margin-top: 25px; font-size: .72rem; letter-spacing: .15em; }
   .guest-line { max-width: 330px; font-size: .9rem; line-height: 1.7; margin-top: 4px; }
   .guest-name { font-size: 1.22rem; }
