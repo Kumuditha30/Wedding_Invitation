@@ -184,7 +184,7 @@ export default function InvitationClient({ guest }: { guest: Guest }) {
   function openInvitation() {
     if (opening) return;
     setOpening(true);
-    const revealDuration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 120 : 2550;
+    const revealDuration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 120 : 2050;
     window.setTimeout(() => setOpened(true), revealDuration);
 
     const audio = audioRef.current;
@@ -239,47 +239,37 @@ export default function InvitationClient({ guest }: { guest: Guest }) {
       {!opened && (
         <div className={`opening-screen${opening ? " is-opening" : ""}`}>
           <div className="opening-layout">
-            <div className="envelope-stage" aria-hidden="true">
-              <div className="envelope-aura" />
-              <div className="invitation-letter">
-                <div className="letter-frame">
-                  <span className="letter-ornament">❦</span>
-                  <span className="letter-kicker">The Homecoming</span>
-                  <span className="letter-couple">Sachintha <i>&amp;</i> Ranumi</span>
-                  <span className="letter-divider">✦</span>
-                  <span className="letter-date">{wedding.dateLabel}</span>
-                </div>
-              </div>
-              <div className="envelope-shell">
-                <div className="envelope-back" />
-                <div className="envelope-side envelope-side--left" />
-                <div className="envelope-side envelope-side--right" />
-                <div className="envelope-front">
-                  <svg className="envelope-etching" viewBox="0 0 560 300" fill="none">
-                    <path d="M26 248c83-2 102-65 142-93 39-27 78-24 112 24 35-48 73-51 112-24 41 28 60 91 142 93M31 267c74 0 98-47 138-72m222 0c40 25 64 72 138 72" />
-                    <path d="M280 116c26 19 41 40 41 58s-15 39-41 58c-26-19-41-40-41-58s15-39 41-58Z" />
-                    <circle cx="280" cy="174" r="18" />
-                    <path d="M280 156v36m-14-18h28m-24-11 20 22m0-22-20 22" />
-                    <path d="M156 155c-21-17-24-34-10-50 19 10 24 27 10 50Zm248 0c21-17 24-34 10-50-19 10-24 27-10 50ZM80 216c-22-8-31-24-25-43 23 3 34 18 25 43Zm400 0c22-8 31-24 25-43-23 3-34 18-25 43Z" />
-                    <circle cx="146" cy="105" r="4" /><circle cx="414" cy="105" r="4" />
-                    <circle cx="55" cy="173" r="4" /><circle cx="505" cy="173" r="4" />
-                  </svg>
-                </div>
-                <div className="envelope-flap" />
-                <div className="envelope-seal">
-                  <svg viewBox="0 0 48 48" fill="none">
-                    <circle cx="24" cy="24" r="17" />
-                    <circle cx="24" cy="24" r="12" />
-                    <path d="M24 12c5 4 6 8 0 12-6-4-5-8 0-12Zm0 12c6 4 6 8 0 12-6-4-6-8 0-12Zm0 0c-5-4-9-4-12 0 3 5 7 5 12 0Zm0 0c5-4 9-4 12 0-3 5-7 5-12 0Z" />
-                    <circle cx="24" cy="24" r="2" />
-                  </svg>
-                </div>
-              </div>
+            <div className="envelope-stage">
+              <Image
+                className="envelope-art envelope-art--closed"
+                src="/images/wedding-envelope-closed.webp"
+                alt=""
+                width={1672}
+                height={941}
+                preload
+                sizes="(max-width: 560px) 100vw, 980px"
+              />
+              <Image
+                className="envelope-art envelope-art--open"
+                src="/images/wedding-envelope-open.webp"
+                alt=""
+                width={1672}
+                height={941}
+                loading="eager"
+                sizes="(max-width: 560px) 100vw, 980px"
+              />
+              <button
+                className="envelope-seal-hotspot"
+                type="button"
+                onClick={openInvitation}
+                disabled={opening}
+                aria-label="Open the invitation from the wax seal"
+              />
             </div>
             <div className="opening-card">
               <div className="opening-card-frame">
-                <div className="opening-title">Sachintha <span>&amp;</span> Ranumi</div>
-                <button className="open-invitation" type="button" onClick={openInvitation} disabled={opening}>
+                <h1 className="opening-title">Sachintha <span>&amp;</span> Ranumi</h1>
+                <button className="open-invitation" type="button" onClick={openInvitation} disabled={opening} aria-busy={opening}>
                   {opening ? "Opening invitation" : "Open invitation"} <span aria-hidden="true">✦</span>
                 </button>
               </div>

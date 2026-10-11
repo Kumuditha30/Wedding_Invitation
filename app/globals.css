@@ -738,12 +738,6 @@ a {
 @keyframes sparkle { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
 
 @media (max-width: 560px) {
-  .opening-screen { padding: 0 12px max(12px, env(safe-area-inset-bottom)); }
-  .opening-card { width: min(440px, 100%); padding: 8px; margin-bottom: clamp(24px, 7vh, 54px); }
-  .opening-card-frame { padding: 23px 9px 21px; }
-  .opening-title { font-size: clamp(1.45rem, 7.1vw, 2.35rem); }
-  .opening-title::after { margin-top: 14px; }
-  .open-invitation { width: min(290px, 100%); min-height: 48px; margin-top: 16px; }
   .music-control { top: auto; right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); }
 
   .mehendi-vine { width: 164px; height: 72vh; top: 12vh; opacity: .25; }
@@ -797,28 +791,35 @@ a {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
 
-/* Burgundy envelope reveal, adapted to the existing night palette. */
+/* Matching illustrated envelope frames create a clear open-and-reveal sequence. */
 .opening-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
   display: grid;
   place-items: center;
+  overflow: hidden;
   padding: max(24px, env(safe-area-inset-top)) 18px max(24px, env(safe-area-inset-bottom));
   background:
-    radial-gradient(ellipse at 50% 39%, rgba(100, 22, 37, .42), transparent 30rem),
-    radial-gradient(circle at 50% 53%, rgba(215, 177, 108, .075), transparent 23rem),
-    linear-gradient(145deg, rgba(9, 7, 8, .91), rgba(21, 11, 14, .83) 52%, rgba(8, 6, 7, .9));
-  transition: opacity .48s ease 2.02s;
+    radial-gradient(ellipse at 50% 43%, rgba(112, 21, 39, .34), transparent 32rem),
+    radial-gradient(circle at 50% 52%, rgba(215, 177, 108, .13), transparent 28rem),
+    linear-gradient(145deg, rgba(9, 7, 8, .68), rgba(21, 11, 14, .52) 52%, rgba(8, 6, 7, .69));
+  transition: opacity .46s ease 1.54s;
 }
 .opening-screen::before {
   content: "";
   position: absolute;
   top: 50%;
   left: 50%;
-  width: min(72vw, 570px);
-  height: min(78vh, 740px);
+  width: min(76vw, 660px);
+  height: min(84svh, 790px);
   transform: translate(-50%, -50%);
-  border: 1px solid rgba(216, 179, 110, .18);
-  border-radius: 50% 50% 4px 4px;
-  box-shadow: 0 0 0 12px rgba(216, 179, 110, .025), inset 0 0 70px rgba(216, 179, 110, .025);
+  border: 1px solid rgba(224, 189, 121, .25);
+  border-radius: 50% 50% 3px 3px;
+  box-shadow:
+    0 0 0 12px rgba(224, 189, 121, .035),
+    0 0 0 30px rgba(224, 189, 121, .018),
+    inset 0 0 90px rgba(224, 189, 121, .035);
   pointer-events: none;
 }
 .opening-screen::after {
@@ -826,7 +827,7 @@ a {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(ellipse at center, transparent 31%, rgba(0, 0, 0, .46) 100%);
+  background: radial-gradient(ellipse at center, transparent 34%, rgba(0, 0, 0, .42) 100%);
 }
 .opening-layout {
   position: relative;
@@ -835,160 +836,107 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(16px, 3vh, 30px);
-  width: min(620px, 100%);
+  gap: clamp(12px, 2.4svh, 22px);
+  width: min(100%, 1080px);
 }
 .envelope-stage {
   position: relative;
-  width: min(530px, 88vw);
-  height: clamp(230px, 39vh, 350px);
-  perspective: 1400px;
-  filter: drop-shadow(0 22px 26px rgba(0, 0, 0, .43));
+  width: min(94vw, 980px);
+  height: min(55.2vw, 550px, 70svh);
+  flex: 0 0 auto;
+  filter: drop-shadow(0 24px 26px rgba(0, 0, 0, .42));
 }
-.envelope-aura {
+.envelope-art {
   position: absolute;
-  inset: 12% -6%;
-  border-radius: 50%;
-  background: radial-gradient(ellipse, rgba(179, 19, 43, .2), transparent 68%);
-  filter: blur(10px);
-}
-.invitation-letter {
-  position: absolute;
-  z-index: 1;
-  top: 1%;
-  left: 50%;
-  width: 58%;
-  height: 111%;
-  padding: 10px;
-  transform: translate(-50%, 23%) rotate(-.35deg);
-  opacity: .96;
-  border: 1px solid rgba(226, 194, 132, .88);
-  background:
-    radial-gradient(circle at 14% 12%, rgba(255,255,255,.8), transparent 48%),
-    linear-gradient(150deg, #f1e7d4, #ddc8a8 52%, #f0e5d2);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, .45), inset 0 0 26px rgba(135, 89, 35, .08);
-  transition: transform 1.3s cubic-bezier(.18,.78,.25,1), opacity .65s ease;
-}
-.letter-frame {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 14px 8px;
-  border: 1px solid rgba(126, 29, 43, .42);
-  color: #541723;
-  text-align: center;
-  box-shadow: inset 0 0 0 3px rgba(126, 29, 43, .055);
-}
-.letter-ornament { margin-bottom: 8px; color: #9d7139; font: 1.65rem/1 Georgia, serif; }
-.letter-kicker { color: #7a2735; font: 600 .48rem/1.4 Arial, sans-serif; letter-spacing: .24em; text-transform: uppercase; }
-.letter-couple { display: block; margin-top: 9px; font: 400 clamp(.9rem, 2.5vw, 1.3rem)/1.15 Georgia, serif; }
-.letter-couple i { color: #9c7040; font-style: italic; }
-.letter-divider { margin: 9px 0 6px; color: #a47a45; font-size: .7rem; }
-.letter-date { font: 500 .48rem/1.3 Arial, sans-serif; letter-spacing: .16em; text-transform: uppercase; }
-.envelope-shell {
-  position: absolute;
-  z-index: 3;
-  left: 50%;
-  bottom: 7%;
+  inset: 0;
+  display: block;
   width: 100%;
-  height: 66%;
-  transform: translateX(-50%);
-  transform-style: preserve-3d;
-}
-.envelope-back {
-  position: absolute;
-  inset: 0;
-  border: 1px solid rgba(224, 187, 111, .79);
-  border-radius: 4px;
-  background:
-    radial-gradient(circle at 20% 26%, rgba(242, 211, 159, .13) 0 1px, transparent 2px),
-    radial-gradient(circle at 74% 72%, rgba(0, 0, 0, .18), transparent 60%),
-    linear-gradient(135deg, #842a39, #4c111e 54%, #70202f);
-  background-size: 17px 17px, auto, auto;
-  box-shadow: inset 0 0 34px rgba(0, 0, 0, .22), 0 18px 48px rgba(0, 0, 0, .4);
-}
-.envelope-side {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #a64852, #641a28 55%, #8a2937);
-  filter: drop-shadow(0 0 1px rgba(238, 205, 143, .55));
-}
-.envelope-side--left { z-index: 4; clip-path: polygon(0 0, 51% 53%, 0 100%); }
-.envelope-side--right { z-index: 4; clip-path: polygon(100% 0, 49% 53%, 100% 100%); }
-.envelope-front {
-  position: absolute;
-  z-index: 5;
-  inset: 0;
-  overflow: hidden;
-  clip-path: polygon(0 0, 50% 59%, 100% 0, 100% 100%, 0 100%);
-  background:
-    linear-gradient(145deg, rgba(214, 163, 104, .07), transparent 50%),
-    linear-gradient(135deg, #762433, #50121f 62%, #7e2533);
-  filter: drop-shadow(0 0 1px rgba(238, 205, 143, .6));
-}
-.envelope-etching {
-  position: absolute;
-  inset: 1.5% 2%;
-  width: 96%;
-  height: 96%;
-  stroke: rgba(225, 190, 124, .61);
-  stroke-width: 1.1;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  opacity: .84;
-}
-.envelope-etching path:nth-child(2), .envelope-etching circle:nth-of-type(1) { stroke: rgba(244, 218, 164, .82); }
-.envelope-flap {
-  position: absolute;
-  z-index: 7;
-  inset: 0;
-  clip-path: polygon(0 0, 100% 0, 50% 58%);
-  transform-origin: 50% 0;
-  transform-style: preserve-3d;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  transform-origin: 50% 56%;
   backface-visibility: hidden;
-  background:
-    linear-gradient(135deg, rgba(255, 222, 155, .2), transparent 42%),
-    linear-gradient(130deg, #943746, #5a1421 58%, #812836);
-  filter: drop-shadow(0 1px 1px rgba(232, 195, 127, .8));
+  will-change: opacity, transform, clip-path;
 }
-.envelope-seal {
+.envelope-art--closed {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity .62s ease .1s, transform .85s cubic-bezier(.2, .76, .25, 1) .08s, filter .62s ease .1s;
+}
+.envelope-art--open {
+  opacity: 0;
+  clip-path: inset(98% 0 0);
+  transform: translateY(12px) scale(.965);
+  transition: opacity .56s ease .08s, clip-path 1.02s cubic-bezier(.2, .76, .25, 1) .08s, transform 1.05s cubic-bezier(.2, .76, .25, 1) .08s;
+}
+.opening-screen.is-opening .envelope-art--closed {
+  opacity: 0;
+  filter: brightness(.68) blur(1px);
+  transform: translateY(-10px) scale(.985);
+}
+.opening-screen.is-opening .envelope-art--open {
+  opacity: 1;
+  clip-path: inset(0);
+  transform: translateY(0) scale(1);
+}
+.envelope-seal-hotspot {
   position: absolute;
-  z-index: 8;
-  top: 43%;
-  left: 50%;
-  display: grid;
-  place-items: center;
-  width: clamp(42px, 8vw, 60px);
+  z-index: 2;
+  top: 54.8%;
+  left: 49.7%;
+  width: clamp(52px, 14.5%, 146px);
   aspect-ratio: 1;
+  padding: 0;
   transform: translate(-50%, -50%);
-  border: 1px solid rgba(246, 218, 159, .86);
+  border: 1px solid transparent;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 29%, #b34c54, #751c2c 64%, #4c111c);
-  box-shadow: 0 2px 9px rgba(0, 0, 0, .42), inset 0 0 0 4px rgba(236, 199, 132, .11), inset 0 0 14px rgba(0, 0, 0, .3);
-  transition: opacity .35s ease, transform .55s cubic-bezier(.2,.8,.2,1);
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
-.envelope-seal svg { width: 67%; stroke: rgba(242, 215, 158, .91); stroke-width: 1.35; stroke-linecap: round; stroke-linejoin: round; }
-.opening-screen.is-opening { opacity: 0; pointer-events: none; }
-.opening-screen.is-opening .envelope-flap { animation: envelopeFlap .9s cubic-bezier(.2,.72,.26,1) forwards; }
-.opening-screen.is-opening .envelope-seal { opacity: 0; transform: translate(-50%, -50%) scale(.45) rotate(32deg); }
-.opening-screen.is-opening .invitation-letter { transform: translate(-50%, -1%) rotate(0); opacity: 1; transition-delay: .28s; }
-.opening-screen.is-opening .envelope-shell { animation: envelopeShellDrop 1.15s .42s cubic-bezier(.2,.72,.24,1) forwards; }
-.opening-screen.is-opening .opening-card { opacity: 0; transform: translateY(13px) scale(.97); transition-delay: 1.48s; }
+.envelope-seal-hotspot::before {
+  content: "";
+  position: absolute;
+  inset: -9px;
+  border: 1px solid rgba(245, 215, 159, .75);
+  border-radius: inherit;
+  box-shadow: 0 0 20px rgba(225, 177, 94, .24);
+  opacity: 0;
+  pointer-events: none;
+}
+.envelope-seal-hotspot:not(:disabled)::before {
+  animation: sealBloom 3.1s ease-out infinite;
+}
+.envelope-seal-hotspot:hover:not(:disabled)::before,
+.envelope-seal-hotspot:focus-visible::before {
+  animation: none;
+  opacity: .86;
+  box-shadow: 0 0 26px rgba(245, 215, 159, .38);
+}
+.envelope-seal-hotspot:focus-visible {
+  outline: 2px solid #f1d59b;
+  outline-offset: 3px;
+}
+.envelope-seal-hotspot:disabled { cursor: wait; }
+.opening-screen.is-opening .envelope-seal-hotspot {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease;
+}
 .opening-card {
   position: relative;
   z-index: 3;
   width: min(560px, 100%);
+  margin: 0;
   padding: 0;
   text-align: center;
   background: none;
   border: 0;
   box-shadow: none;
-  animation: cardRise .8s cubic-bezier(.2,.8,.2,1) both;
-  transition: opacity .42s ease, transform .52s cubic-bezier(.2,.8,.2,1);
+  animation: cardRise .8s cubic-bezier(.2, .8, .2, 1) both;
+  transition: opacity .38s ease, transform .5s cubic-bezier(.2, .8, .2, 1);
 }
-.opening-card-frame { position: relative; padding: 7px 12px 0; }
+.opening-card-frame { position: relative; padding: 0 12px; }
 .opening-title {
   margin: 0;
   color: #f5eddf;
@@ -1003,98 +951,87 @@ a {
   display: block;
   width: clamp(58px, 12vw, 86px);
   height: 1px;
-  margin: 14px auto 0;
+  margin: 12px auto 0;
   background: linear-gradient(90deg, transparent, #cba363 25%, #f1dba7 50%, #cba363 75%, transparent);
   box-shadow: 0 0 10px rgba(231, 194, 125, .38);
 }
 .open-invitation {
   width: min(320px, 100%);
   min-height: 50px;
-  margin-top: 18px;
+  margin-top: 16px;
   padding: 0 24px;
   border: 1px solid #dfbd7d;
   border-radius: 3px;
   color: #fff8ed;
   background: linear-gradient(135deg, #741d2c, #9b3540 52%, #5f1423);
-  box-shadow: inset 0 0 0 2px rgba(255,255,255,.045), 0 10px 30px rgba(0,0,0,.32), 0 0 24px rgba(224,189,121,.1);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .045), 0 10px 30px rgba(0, 0, 0, .32), 0 0 24px rgba(224, 189, 121, .1);
   font-size: .68rem;
   font-weight: 600;
   letter-spacing: .14em;
   text-transform: uppercase;
   transition: transform .2s ease, filter .2s ease, box-shadow .2s ease;
 }
-.open-invitation:hover:not(:disabled) { transform: translateY(-2px); filter: brightness(1.13); box-shadow: 0 12px 36px rgba(0,0,0,.4), 0 0 28px rgba(224,189,121,.17); }
+.open-invitation:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.13);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, .4), 0 0 28px rgba(224, 189, 121, .17);
+}
+.open-invitation:focus-visible {
+  outline: 2px solid #f1d59b;
+  outline-offset: 4px;
+}
 .open-invitation:disabled { cursor: wait; opacity: .9; }
 .open-invitation span { margin-left: 8px; color: #ecd090; }
+.opening-screen.is-opening { opacity: 0; pointer-events: none; }
+.opening-screen.is-opening .opening-card {
+  opacity: 0;
+  transform: translateY(10px) scale(.98);
+  transition-delay: .18s;
+}
 
 .section-label, .ornament, .icon { color: var(--red-bright); }
 .info-card, .rsvp-card, .admin-card {
   border-color: rgba(216, 179, 110, .2);
-  background: linear-gradient(145deg, rgba(120, 45, 57, .15), rgba(255,255,255,.018));
+  background: linear-gradient(145deg, rgba(120, 45, 57, .15), rgba(255, 255, 255, .018));
 }
-.countdown .time-box { border-color: rgba(216,179,110,.29); background: rgba(118,28,43,.15); }
-.venue-box { border-color: rgba(216,179,110,.25); background: radial-gradient(circle at 50% 0%, rgba(118,28,43,.23), transparent 58%), #10090b; }
-.map-frame-wrap { border-color: rgba(216,179,110,.24); }
+.countdown .time-box { border-color: rgba(216, 179, 110, .29); background: rgba(118, 28, 43, .15); }
+.venue-box { border-color: rgba(216, 179, 110, .25); background: radial-gradient(circle at 50% 0%, rgba(118, 28, 43, .23), transparent 58%), #10090b; }
+.map-frame-wrap { border-color: rgba(216, 179, 110, .24); }
 .map-button, .rsvp-button, .admin-button { border-color: #d8b36e; background: #741d2c; }
 .map-button:hover, .rsvp-button:hover, .admin-button:hover { background: #8e2b3b; }
 .hero-rule { background: linear-gradient(90deg, transparent, #d8b36e, transparent); }
-.mehendi-backdrop--opening .mehendi-vine { opacity: .29; }
-.mehendi-backdrop--opening .mehendi-medallion { opacity: .25; }
+.mehendi-backdrop--opening .mehendi-vine:not(.mehendi-vine--secondary) { opacity: .42; }
+.mehendi-backdrop--opening .mehendi-vine--secondary { opacity: .3; }
+.mehendi-backdrop--opening .mehendi-medallion { opacity: .32; }
 
-@keyframes envelopeFlap { 0% { transform: rotateX(0); } 32% { transform: rotateX(-38deg); } 100% { transform: rotateX(-158deg); } }
-@keyframes envelopeShellDrop { 0% { transform: translateX(-50%); opacity: 1; } 72% { transform: translateX(-50%) translateY(52%); opacity: .92; } 100% { transform: translateX(-50%) translateY(72%); opacity: 0; } }
-@keyframes cardRise { from { opacity: 0; transform: translateY(18px) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes sealBloom {
+  0% { transform: scale(.78); opacity: 0; }
+  14% { opacity: .5; }
+  70%, 100% { transform: scale(1.32); opacity: 0; }
+}
+@keyframes cardRise {
+  from { opacity: 0; transform: translateY(18px) scale(.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
 
 @media (max-width: 560px) {
-  .opening-screen { padding-inline: 13px; }
-  .opening-screen::before { width: min(86vw, 420px); height: 76vh; }
-  .opening-layout { gap: 16px; }
-  .envelope-stage { width: min(94vw, 400px); height: clamp(205px, 31vh, 285px); }
-  .invitation-letter { width: 61%; height: 108%; padding: 7px; }
-  .letter-frame { padding: 9px 5px; }
-  .letter-ornament { font-size: 1.25rem; margin-bottom: 5px; }
-  .letter-kicker, .letter-date { font-size: .4rem; }
-  .letter-couple { font-size: clamp(.78rem, 3.5vw, 1.05rem); margin-top: 6px; }
-  .letter-divider { margin: 5px 0 4px; }
-  .opening-card { width: 100%; margin: 0; }
-  .opening-card-frame { padding: 3px 6px 0; }
-  .opening-title { font-size: clamp(1.4rem, 6.5vw, 2.15rem); }
-  .open-invitation { width: min(290px, 100%); min-height: 48px; margin-top: 15px; }
-  .mehendi-backdrop--opening .mehendi-vine { opacity: .21; }
-  .mehendi-backdrop--opening .mehendi-medallion { opacity: .17; }
+  .opening-screen { padding-inline: 10px; }
+  .opening-screen::before { width: min(86vw, 420px); height: 76svh; }
+  .opening-layout { gap: clamp(12px, 2svh, 18px); }
+  .envelope-stage {
+    width: min(100%, 520px);
+    height: min(55.2vw, 340px, 62svh);
+  }
+  .opening-card { width: 100%; }
+  .opening-card-frame { padding-inline: 4px; }
+  .opening-title { font-size: clamp(1.38rem, 6.4vw, 2.15rem); }
+  .open-invitation { width: min(290px, 100%); min-height: 48px; margin-top: 14px; }
+  .mehendi-backdrop--opening .mehendi-vine:not(.mehendi-vine--secondary) { opacity: .34; }
+  .mehendi-backdrop--opening .mehendi-vine--secondary { opacity: .24; }
+  .mehendi-backdrop--opening .mehendi-medallion { opacity: .26; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .opening-screen { transition-delay: 0s; }
-  .opening-screen.is-opening .envelope-flap,
-  .opening-screen.is-opening .envelope-shell { animation-duration: .25s; animation-delay: 0s; }
-  .opening-screen.is-opening .invitation-letter { transition-delay: 0s; }
-}
-
-.couple-art--hero {
-  position: relative;
-  overflow: hidden;
-  padding: 7px;
-  border: 1px solid rgba(216, 179, 110, .58);
-  border-radius: 180px 180px 4px 4px;
-  background: linear-gradient(150deg, rgba(126, 36, 50, .45), rgba(13, 9, 10, .92) 55%, rgba(111, 70, 36, .26));
-  box-shadow: 0 24px 58px rgba(0,0,0,.4), 0 0 34px rgba(160, 110, 56, .12), inset 0 0 0 3px rgba(216,179,110,.06);
-}
-.couple-art--hero::before {
-  content: "";
-  position: absolute;
-  z-index: 1;
-  inset: 8px;
-  border: 1px solid rgba(216, 179, 110, .27);
-  border-radius: 174px 174px 1px 1px;
-  pointer-events: none;
-}
-.couple-art--hero .couple-portrait { border-radius: inherit; }
-.hero-title span:not(.amp) { text-shadow: 0 0 28px rgba(216,179,110,.12); }
-.venue-name { color: #f1e4ce; }
-.footer { color: #9e8972; }
-
-@media (max-width: 560px) {
-  .couple-art--hero { padding: 5px; border-radius: 150px 150px 3px 3px; }
-  .couple-art--hero::before { inset: 6px; border-radius: 144px 144px 1px 1px; }
+  .envelope-seal-hotspot:not(:disabled)::before { animation: none; }
 }
