@@ -845,6 +845,8 @@ a {
   height: min(55.2vw, 550px, 70svh);
   flex: 0 0 auto;
   filter: drop-shadow(0 24px 26px rgba(0, 0, 0, .42));
+  background: #180a0d;
+  border-radius: 14px;
 }
 .envelope-art {
   position: absolute;
