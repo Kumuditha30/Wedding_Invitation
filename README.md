@@ -140,4 +140,4 @@ Change colors, wording, couple names, date, venue and map URL there if needed.
 
 
 ### Invitation design update
-The dark Homecoming invitation opens with a one-shot burgundy envelope reveal, accented with gold mehendi ornament and a printed invitation card. The page keeps the layered mehendi-inspired background and faceless 2D couple illustration: the groom wears a black salwar kameez and glasses, and the bride wears a blood-red embroidered lehenga. The opening button starts optional instrumental music: “Canon in D Major” by Kevin MacLeod, streamed from Wikimedia Commons. It is used under CC BY 3.0; attribution and links are shown in the site footer.
+The dark Homecoming invitation opens with a one-shot burgundy envelope reveal, accented with gold mehendi ornament and a printed invitation card. The page keeps the layered mehendi-inspired background and faceless 2D couple illustration: the groom wears a black salwar kameez and glasses, and the bride wears a blood-red embroidered lehenga. The opening button starts the optional music player; its audio file is `public/music/homecoming-theme.wav`.

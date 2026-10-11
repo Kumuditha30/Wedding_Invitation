@@ -232,12 +232,7 @@ export default function InvitationClient({ guest }: { guest: Guest }) {
 
   return (
     <main className="invitation-page">
-      <audio
-        ref={audioRef}
-        src="https://upload.wikimedia.org/wikipedia/commons/c/c6/Canon_in_D_Major_%28ISRC_USUAN1100301%29.mp3"
-        preload="none"
-        aria-hidden="true"
-      />
+      <audio ref={audioRef} src="/music/homecoming-theme.wav" preload="auto" aria-hidden="true" />
 
       <MehendiBackdrop isOpening={!opened} />
 
@@ -456,10 +451,6 @@ export default function InvitationClient({ guest }: { guest: Guest }) {
         With love, Sachintha &amp; Ranumi
         <br />
         {wedding.dateLabel} • {wedding.venue}
-        <div className="music-credit">
-          Opening music: <a href="https://commons.wikimedia.org/wiki/File:Canon_in_D_Major_(ISRC_USUAN1100301).mp3" target="_blank" rel="noreferrer">“Canon in D Major” by Kevin MacLeod</a>
-          {' '}· Used under <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noreferrer">CC BY 3.0</a>
-        </div>
       </footer>
     </main>
   );

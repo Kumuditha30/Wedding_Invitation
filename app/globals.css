@@ -381,18 +381,6 @@ a {
   font-size: .8rem;
 }
 
-.music-credit {
-  margin-top: 14px;
-  color: #8f817b;
-  font-size: .68rem;
-}
-
-.music-credit a {
-  color: #cdb777;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
 .admin-page {
   min-height: 100vh;
   padding: 34px;
