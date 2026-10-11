@@ -801,8 +801,6 @@ a {
   overflow: hidden;
   padding: max(24px, env(safe-area-inset-top)) 18px max(24px, env(safe-area-inset-bottom));
   background:
-    radial-gradient(ellipse at 50% 43%, rgba(112, 21, 39, .34), transparent 32rem),
-    radial-gradient(circle at 50% 52%, rgba(215, 177, 108, .13), transparent 28rem),
     linear-gradient(145deg, rgba(9, 7, 8, .68), rgba(21, 11, 14, .52) 52%, rgba(8, 6, 7, .69));
   transition: opacity .46s ease 1.54s;
 }
@@ -845,8 +843,6 @@ a {
   height: min(55.2vw, 550px, 70svh);
   flex: 0 0 auto;
   filter: drop-shadow(0 24px 26px rgba(0, 0, 0, .42));
-  background: #180a0d;
-  border-radius: 14px;
 }
 .envelope-art {
   position: absolute;
