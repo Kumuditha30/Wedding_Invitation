@@ -360,8 +360,8 @@ export default function InvitationClient({ guest }: { guest: Guest }) {
           </p>
           <div className="map-frame-wrap">
             <iframe
-              title="HikkaTranz Hikkaduwa map"
-              src="https://www.google.com/maps?q=HikkaTranz%20Hikkaduwa%20Sri%20Lanka&output=embed"
+              title="HikkaTranz by Cinnamon map"
+              src="https://www.google.com/maps?q=HikkaTranz%20by%20Cinnamon%20Sri%20Lanka&output=embed"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen
