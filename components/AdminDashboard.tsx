@@ -27,11 +27,7 @@ type Stats = {
 };
 
 function invitationUrl(code: string) {
-  const base =
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    (typeof window !== "undefined" ? window.location.origin : "");
-
-  return `${base}/i/${code}`;
+  return `https://weddinginvitation-two-vert.vercel.app/i/${encodeURIComponent(code)}`;
 }
 
 function whatsappMessage(guest: Pick<Guest, "name" | "invitation_code">) {
