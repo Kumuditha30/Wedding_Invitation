@@ -34,6 +34,22 @@ function invitationUrl(code: string) {
   return `${base}/i/${code}`;
 }
 
+function whatsappMessage(guest: Pick<Guest, "name" | "invitation_code">) {
+  const invitation = invitationUrl(guest.invitation_code);
+
+  return [
+    `Hi ${guest.name} ✨`,
+    "",
+    `With so much love and happiness in our hearts, we're excited to invite you to celebrate the wedding of ${wedding.groom} & ${wedding.bride}.`,
+    "",
+    "It would truly mean the world to us to have you with us on this special day 🤍",
+    "",
+    `${wedding.bride} & ${wedding.groom}: ${invitation}`,
+    "",
+    "We can't wait to celebrate, laugh, and create beautiful memories with you!"
+  ].join("\n");
+}
+
 export default function AdminDashboard({
   initialGuests,
   stats
@@ -48,6 +64,11 @@ export default function AdminDashboard({
   const [filter, setFilter] = useState("");
   const [busy, setBusy] = useState(false);
   const [importing, setImporting] = useState(false);
+  const [copiedMessageFor, setCopiedMessageFor] = useState<string | null>(null);
+  const [editingGuestId, setEditingGuestId] = useState<string | null>(null);
+  const [editName, setEditName] = useState("");
+  const [editSeats, setEditSeats] = useState("1");
+  const [savingGuestId, setSavingGuestId] = useState<string | null>(null);
 
   const filtered = useMemo(() => {
     const q = filter.toLowerCase().trim();
@@ -104,9 +125,75 @@ export default function AdminDashboard({
     setGuests((current) => current.filter((g) => g.id !== id));
   }
 
+  function startEditingGuest(guest: Guest) {
+    setEditingGuestId(guest.id);
+    setEditName(guest.name);
+    setEditSeats(String(guest.seats));
+  }
+
+  async function saveGuest(guest: Guest) {
+    const trimmedName = editName.trim();
+    const seatCount = Number(editSeats);
+
+    if (!trimmedName || trimmedName.length > 150) {
+      alert("Enter a name up to 150 characters.");
+      return;
+    }
+
+    if (!Number.isInteger(seatCount) || seatCount < 1 || seatCount > 50) {
+      alert("Seats must be a whole number from 1 to 50.");
+      return;
+    }
+
+    if (guest.rsvp_status === "attending" && seatCount < (guest.attendee_count ?? 0)) {
+      alert(`Seats cannot be lower than the ${guest.attendee_count} confirmed attendee(s).`);
+      return;
+    }
+
+    setSavingGuestId(guest.id);
+
+    try {
+      const response = await fetch(`/api/admin/guests/${guest.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: trimmedName, seats: seatCount })
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        alert(result.error || "Could not update invitation.");
+        return;
+      }
+
+      setGuests((current) => current.map((item) => item.id === guest.id ? result : item));
+      setEditingGuestId(null);
+    } catch {
+      alert("Could not update invitation. Check your connection and try again.");
+    } finally {
+      setSavingGuestId(null);
+    }
+  }
+
   async function copyLink(code: string) {
     await navigator.clipboard.writeText(invitationUrl(code));
     alert("Invitation link copied.");
+  }
+
+  async function copyWhatsAppMessage(guest: Guest) {
+    try {
+      await navigator.clipboard.writeText(whatsappMessage(guest));
+      setCopiedMessageFor(guest.id);
+      window.setTimeout(() => {
+        setCopiedMessageFor((current) => current === guest.id ? null : current);
+      }, 2200);
+    } catch {
+      alert("Could not copy the message. Try the WhatsApp button instead.");
+    }
+  }
+
+  function openWhatsApp(guest: Guest) {
+    const href = `https://wa.me/?text=${encodeURIComponent(whatsappMessage(guest))}`;
+    window.open(href, "_blank", "noopener,noreferrer");
   }
 
   async function logout() {
@@ -280,7 +367,7 @@ export default function AdminDashboard({
             <div>
               <h2 style={{ margin: 0 }}>Guest invitations</h2>
               <p style={{ color: "#777", margin: "6px 0 0" }}>
-                {filtered.length} shown
+                {filtered.length} shown · Each guest has a personal message and invitation link.
               </p>
             </div>
 
@@ -317,14 +404,40 @@ export default function AdminDashboard({
                 {filtered.map((guest) => (
                   <tr key={guest.id}>
                     <td>
-                      <strong>{guest.name}</strong>
-                      {guest.message && (
-                        <div style={{ color: "#777", marginTop: 4 }}>
-                          “{guest.message}”
-                        </div>
+                      {editingGuestId === guest.id ? (
+                        <input
+                          className="input guest-edit-input"
+                          value={editName}
+                          onChange={(event) => setEditName(event.target.value)}
+                          maxLength={150}
+                          aria-label={`Edit name for ${guest.name}`}
+                          autoFocus
+                        />
+                      ) : (
+                        <>
+                          <strong>{guest.name}</strong>
+                          {guest.message && (
+                            <div style={{ color: "#777", marginTop: 4 }}>
+                              “{guest.message}”
+                            </div>
+                          )}
+                        </>
                       )}
                     </td>
-                    <td>{guest.seats}</td>
+                    <td>
+                      {editingGuestId === guest.id ? (
+                        <input
+                          className="input guest-edit-input guest-seat-input"
+                          type="number"
+                          min={guest.rsvp_status === "attending" ? Math.max(1, guest.attendee_count ?? 0) : 1}
+                          max={50}
+                          step={1}
+                          value={editSeats}
+                          onChange={(event) => setEditSeats(event.target.value)}
+                          aria-label={`Edit seats for ${guest.name}`}
+                        />
+                      ) : guest.seats}
+                    </td>
                     <td>
                       {guest.rsvp_status === "attending"
                         ? guest.attendee_count ?? 0
@@ -346,18 +459,66 @@ export default function AdminDashboard({
                       </a>
                     </td>
                     <td>
-                      <button
-                        className="small-button"
-                        onClick={() => copyLink(guest.invitation_code)}
-                      >
-                        Copy link
-                      </button>
-                      <button
-                        className="small-button"
-                        onClick={() => deleteGuest(guest.id)}
-                      >
-                        Delete
-                      </button>
+                      <div className="guest-actions">
+                        {editingGuestId === guest.id ? (
+                          <>
+                            <button
+                              className="small-button"
+                              type="button"
+                              onClick={() => saveGuest(guest)}
+                              disabled={savingGuestId === guest.id}
+                            >
+                              {savingGuestId === guest.id ? "Saving..." : "Save changes"}
+                            </button>
+                            <button
+                              className="small-button"
+                              type="button"
+                              onClick={() => setEditingGuestId(null)}
+                              disabled={savingGuestId === guest.id}
+                            >
+                              Cancel
+                            </button>
+                          </>
+                        ) : (
+                          <button
+                            className="small-button"
+                            type="button"
+                            onClick={() => startEditingGuest(guest)}
+                            aria-label={`Edit name and seats for ${guest.name}`}
+                          >
+                            Edit
+                          </button>
+                        )}
+                        <button
+                          className="small-button"
+                          type="button"
+                          onClick={() => copyLink(guest.invitation_code)}
+                        >
+                          Copy link
+                        </button>
+                        <button
+                          className="small-button"
+                          type="button"
+                          onClick={() => copyWhatsAppMessage(guest)}
+                        >
+                          {copiedMessageFor === guest.id ? "Message copied ✓" : "Copy message + link"}
+                        </button>
+                        <button
+                          className="small-button whatsapp-button"
+                          type="button"
+                          onClick={() => openWhatsApp(guest)}
+                          aria-label={`Open WhatsApp message for ${guest.name}`}
+                        >
+                          WhatsApp
+                        </button>
+                        <button
+                          className="small-button"
+                          type="button"
+                          onClick={() => deleteGuest(guest.id)}
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}

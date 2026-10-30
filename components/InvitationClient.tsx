@@ -302,11 +302,11 @@ export default function InvitationClient({ guest }: { guest: Guest }) {
           </div>
 
           <div className="hero-rule" />
-          <div className="hero-date"><h2>{wedding.dateLabel}</h2></div>
-          <br/>
+          <div className="hero-date">{wedding.dateLabel}</div>
+          <br></br>
           <p className="guest-line">
             This invitation is lovingly reserved for{" "}
-            <strong className="guest-name"><h3>{guest.name}</h3></strong>.
+            <strong className="guest-name">{guest.name}</strong>.
           </p>
         </div>
 

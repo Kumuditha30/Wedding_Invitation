@@ -479,7 +479,7 @@ a {
 .guest-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 820px;
+  min-width: 1000px;
 }
 
 .guest-table th,
@@ -531,6 +531,37 @@ a {
 
 .small-button:hover {
   border-color: var(--red-bright);
+}
+
+.guest-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  min-width: 290px;
+}
+
+.guest-actions .small-button {
+  margin: 0;
+}
+
+.guest-edit-input {
+  max-width: 250px;
+  padding: 9px 10px;
+}
+
+.guest-seat-input {
+  max-width: 86px;
+}
+
+.whatsapp-button {
+  border-color: rgba(91, 204, 128, .38);
+  color: #bce9ca;
+}
+
+.whatsapp-button:hover {
+  border-color: #64d88e;
+  background: rgba(37, 211, 102, .08);
 }
 
 .login-page {

@@ -16,6 +16,8 @@ A single wedding invitation website for the December 5, 2026 homecoming wedding 
 - Admin dashboard with counts and guest table.
 - Add, edit and delete invitations.
 - Copy invitation links.
+- Copy a personalized WhatsApp invitation message or open it prefilled for each guest.
+- WhatsApp link preview metadata with a dark burgundy and gold share image.
 - CSV export.
 - Secure server-side Supabase access using the service-role key.
 - Password-protected admin area.
@@ -78,6 +80,8 @@ The dashboard lets you create invitations such as:
 
 Each guest receives a unique link.
 
+To update a guest later, select **Edit** on their row in the guest invitations table. You can change the name and seat limit while keeping their invitation link and RSVP. For guests who have RSVP'd as attending, the seat limit cannot be set below their confirmed attendee count.
+
 Example:
 
 `https://your-domain.com/i/8QK7M2P4`
@@ -122,7 +126,7 @@ Add the same environment variables in Vercel:
 - ADMIN_SESSION_SECRET
 - NEXT_PUBLIC_SITE_URL
 
-Set `NEXT_PUBLIC_SITE_URL` to your Vercel/custom-domain URL.
+Set `NEXT_PUBLIC_SITE_URL` to your Vercel/custom-domain URL so copied invitation links and WhatsApp previews use the public domain.
 
 ## 9. Important security note
 
