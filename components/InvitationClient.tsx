@@ -333,8 +333,9 @@ export default function InvitationClient({ guest }: { guest: Guest }) {
         <div className="info-grid">
           <div className="info-card">
             <div className="icon">◷</div>
-            <h3>Date</h3>
+            <h3>Date &amp; time</h3>
             <p>{wedding.dateLabel}</p>
+            <p>{wedding.timeLabel}</p>
           </div>
 
           <div className="info-card">
@@ -360,8 +361,8 @@ export default function InvitationClient({ guest }: { guest: Guest }) {
           </p>
           <div className="map-frame-wrap">
             <iframe
-              title="HikkaTranz by Cinnamon map"
-              src="https://www.google.com/maps?q=HikkaTranz%20by%20Cinnamon%20Sri%20Lanka&output=embed"
+              title="HikkaTranz Hikkaduwa map"
+              src="https://www.google.com/maps?q=HikkaTranz%20Hikkaduwa%20Sri%20Lanka&output=embed"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen
@@ -450,7 +451,7 @@ export default function InvitationClient({ guest }: { guest: Guest }) {
         <div className="ornament">✦</div>
         With love, Sachintha &amp; Ranumi
         <br />
-        {wedding.dateLabel} • {wedding.venue}
+        {wedding.dateLabel} • {wedding.timeLabel} • {wedding.venue}
       </footer>
     </main>
   );

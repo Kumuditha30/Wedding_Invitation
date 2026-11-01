@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { isAdmin } from "@/lib/admin-auth";
 import { getSupabaseAdmin } from "@/lib/supabase";
+import { invitationUrl } from "@/lib/site-url";
 
 function csvCell(value: unknown) {
   const text = String(value ?? "");
@@ -40,7 +41,7 @@ export async function GET() {
     guest.rsvp_status,
     guest.message ?? "",
     guest.invitation_code,
-    `${process.env.NEXT_PUBLIC_SITE_URL ?? ""}/i/${guest.invitation_code}`,
+    invitationUrl(guest.invitation_code),
     guest.rsvp_at ?? ""
   ]);
 

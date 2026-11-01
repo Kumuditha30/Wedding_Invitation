@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import { publicSiteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
+  metadataBase: new URL(publicSiteUrl),
   title: "Sachintha & Ranumi | Homecoming",
   description:
     "A special homecoming wedding celebration for Sachintha & Ranumi — December 5th, 2026.",

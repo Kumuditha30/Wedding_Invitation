@@ -59,7 +59,6 @@ NEXT_PUBLIC_SUPABASE_URL=...
 SUPABASE_SERVICE_ROLE_KEY=...
 ADMIN_PASSWORD=...
 ADMIN_SESSION_SECRET=...
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
 
 Use a long random value for `ADMIN_SESSION_SECRET`.
@@ -124,9 +123,8 @@ Add the same environment variables in Vercel:
 - SUPABASE_SERVICE_ROLE_KEY
 - ADMIN_PASSWORD
 - ADMIN_SESSION_SECRET
-- NEXT_PUBLIC_SITE_URL
 
-Set `NEXT_PUBLIC_SITE_URL` to your Vercel/custom-domain URL so copied invitation links and WhatsApp previews use the public domain.
+The public invitation domain is configured in `lib/site-url.ts`. Update that URL if you move the site to another domain.
 
 ## 9. Important security note
 

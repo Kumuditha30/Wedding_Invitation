@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { wedding } from "@/lib/wedding";
+import { invitationUrl } from "@/lib/site-url";
 
 type Guest = {
   id: string;
@@ -26,17 +27,13 @@ type Stats = {
   totalAttending: number;
 };
 
-function invitationUrl(code: string) {
-  return `https://weddinginvitation-two-vert.vercel.app/i/${encodeURIComponent(code)}`;
-}
-
 function whatsappMessage(guest: Pick<Guest, "name" | "invitation_code">) {
   const invitation = invitationUrl(guest.invitation_code);
 
   return [
     `Hi ${guest.name} ✨`,
     "",
-    `It's with love and happiness in our hearts, we invite you to celebrate the homecoming of ${wedding.groom} & ${wedding.bride}.`,
+    `With so much love and happiness in our hearts, we're excited to invite you to celebrate the wedding of ${wedding.groom} & ${wedding.bride}.`,
     "",
     "It would truly mean the world to us to have you with us on this special day 🤍",
     "",
@@ -447,7 +444,7 @@ export default function AdminDashboard({
                     <td>
                       <a
                         className="small-button"
-                        href={`/i/${guest.invitation_code}`}
+                        href={invitationUrl(guest.invitation_code)}
                         target="_blank"
                         rel="noreferrer"
                       >
