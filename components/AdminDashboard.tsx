@@ -36,7 +36,7 @@ function whatsappMessage(guest: Pick<Guest, "name" | "invitation_code">) {
   return [
     `Hi ${guest.name} ✨`,
     "",
-    `With so much love and happiness in our hearts, we're excited to invite you to celebrate the wedding of ${wedding.groom} & ${wedding.bride}.`,
+    `With so much love and happiness in our hearts, we're excited to invite you to celebrate the homecoming of ${wedding.groom} & ${wedding.bride}.`,
     "",
     "It would truly mean the world to us to have you with us on this special day 🤍",
     "",
